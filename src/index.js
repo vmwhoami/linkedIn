@@ -58,9 +58,22 @@ async function gotTo(url) {
   await searchFor(page, "it recruiter");
   await page.waitForSelector("[aria-label='People']");
   await page.click("[aria-label='People']");
-  await page.waitForSelector("[aria-label='Locations filter. Clicking this button displays all Locations filter options.']")
-  await page.click("[aria-label='Locations filter. Clicking this button displays all Locations filter options.']")
-  // [aria-label="yes"] 
+  await page.waitForSelector("[aria-label='Locations filter. Clicking this button displays all Locations filter options.']");
+  await page.click("[aria-label='Locations filter. Clicking this button displays all Locations filter options.']");
+  await page.waitForSelector("[aria-label='Add a location']");
+
+  await page.click("[aria-label='Add a location']");
+  await page.keyboard.type("United States");
+  await page.evaluate(() => {
+    debugger;
+  });
+  // page.on("request", request => {
+  //   if (request.resourceType() === "script") {
+  //     request.abort()
+  //   } else {
+  //     request.continue()
+  //   }
+  // })
   // await page.waitForNavigation({ waitUntil: 'networkidle0' })
   // await page.evaluate(async () => {
   //   let elements = await document.getElementsByClassName('artdeco-pill');
