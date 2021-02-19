@@ -1,13 +1,11 @@
-import pass from '../sensitive';
-const login = async(page) = {
-  let password = pass();
-  await page.setViewport({ width: 1366, height: 768 });
-  await page.goto('https://linkedin.com');
+const login = async (page, email, pass) => {
+  let password = pass()
   await page.waitForSelector("#session_key");
-  await page.focus("#session_key");
-  await page.keyboard.type("vmwhoami@gmail.com");
-  await page.focus("#session_password");
-  await page.keyboard.type(password);
+  await page.type("#session_key", email);
+  await page.type("#session_password", password);
+  await page.waitForSelector(".sign-in-form__submit-button")
+  await page.click(".sign-in-form__submit-button")
 }
+
 
 export default login;

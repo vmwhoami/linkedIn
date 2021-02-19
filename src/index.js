@@ -1,35 +1,9 @@
-import puppeteer from 'puppeteer';
+// import puppeteer from 'puppeteer';
 import pass from '../sensitive.js';
-// import login from './login.js'
+import login from './login.js';
+import searchFor from './searchFor.js';
+import { startBrowser, closeBrowser } from './startCloseBrowser.js';
 
-let password = pass();
-
-
-async function login(page) {
-  await page.waitForSelector("#session_key");
-  await page.type("#session_key", "vmwhoami@gmail.com");
-  await page.type("#session_password", password);
-  await page.waitForSelector(".sign-in-form__submit-button")
-  await page.click(".sign-in-form__submit-button")
-}
-
-async function searchFor(page, input) {
-  await page.waitForSelector(".search-global-typeahead__input");
-  await page.click(".search-global-typeahead__input");
-  await page.keyboard.type(input);
-  await page.keyboard.press("Enter");
-}
-
-// Boilerplate stuff
-async function startBrowser() {
-  const browser = await puppeteer.launch({ headless: false });
-  const page = await browser.newPage();
-  return { browser, page };
-}
-
-async function closeBrowser(browser) {
-  return browser.close();
-}
 
 // Normalizing the text
 function getText(linkText) {
@@ -64,7 +38,7 @@ async function gotTo(url) {
   const { browser, page } = await startBrowser();
   page.setViewport({ width: 1366, height: 768 });
   await page.goto(url);
-  login(page)
+  login(page, "vmwhoami@gmail.com", pass)
   searchFor(page, "it recruiter")
   await findByLink(page, "People");
   // await page.screenshot({ path: 'screenshot.png' });
