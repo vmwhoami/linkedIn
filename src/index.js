@@ -54,7 +54,7 @@ async function gotTo(url) {
   const { browser, page } = await startBrowser();
   page.setViewport({ width: 1366, height: 768 });
   await page.goto(url);
-  await login(page, "vmwhoami@gmail.com", pass);
+  await login(page, "vitalie.melnic@yandex.com", pass);
   await searchFor(page, "it recruiter");
   await page.waitForSelector("[aria-label='People']");
   await page.click("[aria-label='People']");
