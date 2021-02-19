@@ -55,8 +55,8 @@ async function gotTo(url) {
   page.setViewport({ width: 1366, height: 768 });
   page.goto(url);
   login(page, "vitalie.melnic@yandex.com", pass);
-  searchFor(page, "it recruiter");
-  selectCountry(page, "china")
+  searchFor(page, "it hiring manager");
+  selectCountry(page, "Korea")
 
 
 }
