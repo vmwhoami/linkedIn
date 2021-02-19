@@ -57,9 +57,9 @@ async function gotTo(url) {
   await login(page, "vmwhoami@gmail.com", pass);
   await searchFor(page, "it recruiter");
   await page.waitForSelector("[aria-label='People']");
-
-  await page.click("[aria-label='People']")
-
+  await page.click("[aria-label='People']");
+  await page.waitForSelector("[aria-label='Locations filter. Clicking this button displays all Locations filter options.']")
+  await page.click("[aria-label='Locations filter. Clicking this button displays all Locations filter options.']")
   // [aria-label="yes"] 
   // await page.waitForNavigation({ waitUntil: 'networkidle0' })
   // await page.evaluate(async () => {
