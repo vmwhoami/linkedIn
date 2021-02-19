@@ -64,33 +64,14 @@ async function gotTo(url) {
 
   await page.click("[aria-label='Add a location']");
   await page.keyboard.type("United States");
-  await page.evaluate(() => {
-    debugger;
-  });
-  // page.on("request", request => {
-  //   if (request.resourceType() === "script") {
-  //     request.abort()
-  //   } else {
-  //     request.continue()
-  //   }
-  // })
-  // await page.waitForNavigation({ waitUntil: 'networkidle0' })
-  // await page.evaluate(async () => {
-  //   let elements = await document.getElementsByClassName('artdeco-pill');
-  //   console.log(elements);
+  await page.click("[aria-label='Add a location']");
+  await page.keyboard.press('ArrowLeft');
+  await page.keyboard.press('ArrowLeft');
+  await page.keyboard.press('ArrowLeft');
+  await page.keyboard.press('ArrowDown');
+  await page.keyboard.press('Enter');
+  await page.mouse.click(".peek-carousel__slides li:nth-child(4) [data-control-name='filter_show_results']")
 
-  //   // for (let element of elements) {
-  //   //   console.log(element);
-  //   // }
-  //   // element.click();
-  // })
-
-  // await page.click()
-  // clickByText(page, 'See all people results')
-  // await findByLink(page, "People");
-  // await page.screenshot({ path: 'screenshot.png' });
-  console.log(button);
-  await closeBrowser(browser);
 }
 
 (async () => {
