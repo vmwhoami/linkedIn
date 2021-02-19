@@ -32,17 +32,52 @@ async function findByLink(page, ElementString) {
   return null;
 }
 
+const escapedString = str => {
+  const splitedQuotes = str.replace(/'/g, `', "'", '`);
+  return `concat('${splitedQuotes}', '')`;
+};
+
+const clickByText = async (page, text) => {
+  const escapedText = escapedString(text);
+  const linkHandlers = await page.$x(`//a[contains(text(), ${escapedText})]`);
+
+  if (linkHandlers.length > 0) {
+    await linkHandlers[0].click();
+  } else {
+    throw new Error(`Link not found: ${text}`);
+  }
+};
+
 
 
 async function gotTo(url) {
   const { browser, page } = await startBrowser();
   page.setViewport({ width: 1366, height: 768 });
   await page.goto(url);
-  login(page, "vmwhoami@gmail.com", pass)
-  searchFor(page, "it recruiter")
-  await findByLink(page, "People");
+  await login(page, "vmwhoami@gmail.com", pass);
+  await searchFor(page, "it recruiter");
+  await page.waitForSelector("[aria-label='People']");
+
+  await page.click("[aria-label='People']")
+
+  // [aria-label="yes"] 
+  // await page.waitForNavigation({ waitUntil: 'networkidle0' })
+  // await page.evaluate(async () => {
+  //   let elements = await document.getElementsByClassName('artdeco-pill');
+  //   console.log(elements);
+
+  //   // for (let element of elements) {
+  //   //   console.log(element);
+  //   // }
+  //   // element.click();
+  // })
+
+  // await page.click()
+  // clickByText(page, 'See all people results')
+  // await findByLink(page, "People");
   // await page.screenshot({ path: 'screenshot.png' });
-  // await closeBrowser(browser);
+  console.log(button);
+  await closeBrowser(browser);
 }
 
 (async () => {
