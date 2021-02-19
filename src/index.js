@@ -5,6 +5,22 @@ import searchFor from './searchFor.js';
 import { startBrowser, closeBrowser } from './startCloseBrowser.js';
 
 
+const selectCountry = async (page, country) => {
+  await page.waitForSelector("[aria-label='People']");
+  await page.click("[aria-label='People']");
+  await page.waitForSelector("[aria-label='Locations filter. Clicking this button displays all Locations filter options.']");
+  await page.click("[aria-label='Locations filter. Clicking this button displays all Locations filter options.']");
+  await page.waitForSelector("[aria-label='Add a location']");
+  await page.click("[aria-label='Add a location']");
+  await page.keyboard.type(country);
+  await page.click("[aria-label='Add a location']");
+  await page.keyboard.press('ArrowLeft');
+  await page.keyboard.press('ArrowLeft');
+  await page.keyboard.press('ArrowLeft');
+  await page.keyboard.press('ArrowDown');
+  await page.keyboard.press('Enter');
+  await page.click(".peek-carousel__slides li:nth-child(4) [data-control-name='filter_show_results']")
+}
 // Normalizing the text
 function getText(linkText) {
   linkText = linkText.replace(/\r\n|\r/g, "\n");
@@ -53,24 +69,11 @@ const clickByText = async (page, text) => {
 async function gotTo(url) {
   const { browser, page } = await startBrowser();
   page.setViewport({ width: 1366, height: 768 });
-  await page.goto(url);
-  await login(page, "vitalie.melnic@yandex.com", pass);
-  await searchFor(page, "it recruiter");
-  await page.waitForSelector("[aria-label='People']");
-  await page.click("[aria-label='People']");
-  await page.waitForSelector("[aria-label='Locations filter. Clicking this button displays all Locations filter options.']");
-  await page.click("[aria-label='Locations filter. Clicking this button displays all Locations filter options.']");
-  await page.waitForSelector("[aria-label='Add a location']");
+  page.goto(url);
+  login(page, "vitalie.melnic@yandex.com", pass);
+  searchFor(page, "it recruiter");
+  selectCountry(page, "china")
 
-  await page.click("[aria-label='Add a location']");
-  await page.keyboard.type("United States");
-  await page.click("[aria-label='Add a location']");
-  await page.keyboard.press('ArrowLeft');
-  await page.keyboard.press('ArrowLeft');
-  await page.keyboard.press('ArrowLeft');
-  await page.keyboard.press('ArrowDown');
-  await page.keyboard.press('Enter');
-  await page.mouse.click(".peek-carousel__slides li:nth-child(4) [data-control-name='filter_show_results']")
 
 }
 
