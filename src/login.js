@@ -1,5 +1,4 @@
-const login = async (page, email, pass) => {
-  let password = pass()
+const login = async (page, email, password) => {
   await page.waitForSelector("#session_key");
   await page.type("#session_key", email);
   await page.type("#session_password", password);

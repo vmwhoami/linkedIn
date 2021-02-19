@@ -51,10 +51,11 @@ const clickByText = async (page, text) => {
 
 
 async function gotTo(url) {
+  const { email, password } = pass()
   const { browser, page } = await startBrowser();
   page.setViewport({ width: 1366, height: 768 });
   page.goto(url);
-  login(page, "vitalie.melnic@yandex.com", pass);
+  login(page, email, password);
   searchFor(page, "it hiring manager");
   selectCountry(page, "Korea")
 
