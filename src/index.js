@@ -50,14 +50,17 @@ const clickByText = async (page, text) => {
 
 const getAllBtns = async (page) => {
   await page.waitForSelector('ul li.reusable-search__result-container button');
-  const btns = await page.$$eval('ul li.reusable-search__result-container button');
-  for (let i = 0; i < btns.length; i += 1) {
-    let button = btns[i]
-    const btn = await (await button.getProperty('innerText')).jsonValue()
-    if (btn.trim() === "Connect") {
-      btn.trim()
-    }
-  }
+  await page.$$eval('ul li.reusable-search__result-container button', (btns) => {
+    return (
+      btns.forEach(btn => {
+        let span = btn.children[0]
+        if (span.tagName === "SPAN" && span.textContent.trim() === "Connect") {
+          return (btn.click())
+        }
+      })
+    )
+  });
+
 }
 
 async function gotTo(url) {
@@ -66,10 +69,9 @@ async function gotTo(url) {
   page.setViewport({ width: 1366, height: 768 });
   page.goto(url);
   login(page, email, password);
-  searchFor(page, "translater");
-  selectCountry(page, "China");
-  // getAllBtns(page);
-  await page.$$eval('ul li.reusable-search__result-container button', a => a[0].click());
+  searchFor(page, "recruiter");
+  selectCountry(page, "Brazil").then(() => getAllBtns(page))
+
 
 }
 

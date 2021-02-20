@@ -1,13 +1,15 @@
 import puppeteer from 'puppeteer';
 (async () => {
-  const browser = await puppeteer.launch({ headless: false, slowMo: 30 });
+  const browser = await puppeteer.launch({ headless: false, slowMo: 200, devtools: true });
   const page = await browser.newPage();
-  await page.goto('https://example.com');
+  await page.goto('https://3dtotal.com/');
+  await page.waitForTimeout(2000)
+  await page.$$eval('.snippet-featured-auto__boxes', (h1) => h1.map(h => {
+    let a = h.childNodes[3];
+    return (
+      console.log(a)
+    )
+  }))
 
-  // Get the "viewport" of the page, as reported by the page.
-  // Page Evaluate makes a selection with query selector all
-  const divCount = await page.$$eval('a', a => a[0].click());
-
-
-  // await browser.close();
+  // page.close()
 })();
