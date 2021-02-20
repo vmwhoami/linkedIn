@@ -12,7 +12,6 @@ const selectCountry = async (page, country) => {
   await page.keyboard.press('Enter');
   await page.waitForSelector(".peek-carousel__slides li:nth-child(4) [data-control-name='filter_show_results']")
   await page.click(".peek-carousel__slides li:nth-child(4) [data-control-name='filter_show_results']")
-
 }
 
 export default selectCountry;
