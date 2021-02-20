@@ -57,8 +57,21 @@ async function gotTo(url) {
   page.goto(url);
   login(page, email, password);
   searchFor(page, "it hiring manager");
-  selectCountry(page, "Korea")
+  selectCountry(page, "Japan")
+  // .artdeco-card .artdeco-button .artdeco-button__text
+  // ul li.reusable-search__result-container button
+  await page.waitForSelector('ul li.reusable-search__result-container button');
+  const btns = await page.$$('ul li.reusable-search__result-container button');
 
+
+  for (let i = 0; i < btns.length; i++) {
+    const button = await (await btns[i].getProperty('innerText')).jsonValue();
+    console.log(button);
+  }
+  // await page.evaluate(() => {
+  //   let elements = document.getElementsByClassName('artdeco-button');
+  //   console.log(elements);
+  // });
 
 }
 
