@@ -19,11 +19,17 @@ const getAllBtns = async (page) => {
         }
       })
     )
-  });
-  await page.$$eval("[aria-label='Add a note']", btn => btn[0].click())
-  await page.waitForSelector("[placeholder='Ex: We know each other from…']")
-  await page.keyboard.type("let's connect");
-  page.$$eval("[aria-label='Send now']", btn => btn[0].click())
+  }).then(() => page.$$eval("[aria-label='Add a note']", btn => btn[0].click()))
+    .then(() => page.waitForSelector("[placeholder='Ex: We know each other from…']"))
+    .then(() => page.keyboard.type("It would be my honour to connect"))
+    .then(() => page.$$eval("[aria-label='Send now']", btn => btn[0].click()))
+  // await page.$$eval("[aria-label='Add a note']", btn => btn[0].click())
+
+  // await page.waitForSelector("[placeholder='Ex: We know each other from…']")
+  // await page.keyboard.type("let's connect");
+  // page.$$eval("[aria-label='Send now']", btn => btn[0].click())
+
+  // #send-invite-modal  //id for h2 with name
 }
 
 async function gotTo(url) {
