@@ -22,7 +22,7 @@ const gotToAndDo = async (url: string,search:string,rizeTop:boolean) => {
 
 }
 
-const url = "https://www.rabota.md/ro/";
+const url = "https://www.linkedin.com";
 const searchCat = 'jobs-moldova-developer';
 const rizeTop =true;
 

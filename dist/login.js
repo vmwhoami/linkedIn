@@ -2,8 +2,9 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const login = async (page, email = "hello", password = "world") => {
     try {
-        await page.waitForSelector('.uk-flex .uk-flex-middle .login');
-        await page.click('.uk-flex .uk-flex-middle .login');
+        await page.waitForSelector('.input__input');
+        await page.click('.input__input');
+        debugger;
         await page.waitForSelector("#rabota_email");
         await page.click("#rabota_email");
         await page.type("#rabota_email", email);

@@ -1,17 +1,5 @@
-## Rabot.md automated cv application
+# LinkedIn
 
-#### Home page
-
-- Chart example
-- Animation example
-
-### Screenshot
-
-![screenshot](./)
-
-## Time estimate
-
-A week with working 4 hours a day sometimes less some times more.
 
 ## Getting Started
 
@@ -42,8 +30,8 @@ PASSWORD=yourPassword
 ### Setup
 
 ```bash
-$ git clone https://github.com/vmwhoami/rabota
-$ cd rabota
+$ git clone https://github.com/vmwhoami/linkedIn
+$ cd linkedIn
 ```
 
 Install modules:
@@ -86,7 +74,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 Contributions, issues and feature requests are welcome!
 
-Feel free to check the [issues page](https://github.com/vmwhoami/rabota/issues).
+Feel free to check the [issues page](https://github.com/vmwhoami/linkdeIn/issues).
 
 ## Show your support
 

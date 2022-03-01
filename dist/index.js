@@ -21,7 +21,7 @@ const gotToAndDo = async (url, search, rizeTop) => {
     await page.addStyleTag({ content: "* {scroll-behavior: auto !important;}" });
     await (0, applyToJobs_1.default)(page);
 };
-const url = "https://www.rabota.md/ro/";
+const url = "https://www.linkedin.com";
 const searchCat = 'jobs-moldova-developer';
 const rizeTop = true;
 (async () => {
