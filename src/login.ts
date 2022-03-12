@@ -3,7 +3,7 @@ const login = async (page: any, email = "hello", password = "world") => {
 
     await page.waitForSelector('.input__input');
     await page.click('.input__input');
-    debugger;
+   
     await page.waitForSelector("#rabota_email");
     await page.click("#rabota_email")
     await page.type("#rabota_email", email);
