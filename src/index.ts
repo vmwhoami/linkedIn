@@ -7,6 +7,13 @@ import makeConnections from './makeConnections';
 
 const [email, password] = [process.env.EMAIL, process.env.PASSWORD];
 const url = 'https://www.linkedin.com/';
+const connect =true;
+const searchOptions = {
+  geoUrn: '["103644278"]',
+  keywords: 'it recruiter',
+  origin: 'FACETED_SEARCH',
+  sid: 'rEa'
+};
 
 const linkedInParser = async (url: string, search:string, connect: boolean) => {
   const { page } = await startBrowser();
@@ -14,18 +21,17 @@ const linkedInParser = async (url: string, search:string, connect: boolean) => {
   await page.goto(url);
   await login(page, email, password);
   
-  connect ? await makeConnections(page) : null;
+  connect ? await makeConnections(page, searchOptions) : null;
  
-  await page.goto(url + search);
-  await page.setViewport({ width: 500, height: 1000 });
-  await page.addStyleTag({ content: "* {scroll-behavior: auto !important;}" });
-  await applyToJobs(page)
+  // await page.goto(url + search);
+  // await page.setViewport({ width: 500, height: 1000 });
+  // await page.addStyleTag({ content: "* {scroll-behavior: auto !important;}" });
+  // await applyToJobs(page)
 
 }
 
  
 const searchCat = 'jobs-moldova-developer';
-const connect =true;
 
 (async () => {
   await linkedInParser(url,searchCat,connect);
