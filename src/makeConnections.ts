@@ -8,7 +8,7 @@ const link = 'https://www.linkedin.com/search/results/people/?geoUrn=%5B%2210364
 
 
 
-const makeConnections = async(page:any):Promise<void>=>{
+const makeConnections = async(page:any,searchOptions:Record <unknown>):Promise<void>=>{
   await page.goto(link);
 
 

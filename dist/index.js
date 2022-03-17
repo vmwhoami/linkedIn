@@ -14,7 +14,7 @@ const searchOptions = {
     origin: 'FACETED_SEARCH',
     sid: 'rEa'
 };
-const linkedInParser = async (url, search, connect) => {
+const linkedInParser = async (url, searchOptions, connect) => {
     const { page } = await (0, startCloseBrowser_1.startBrowser)();
     page.setViewport({ width: 1200, height: 900 });
     await page.goto(url);
@@ -25,8 +25,7 @@ const linkedInParser = async (url, search, connect) => {
     // await page.addStyleTag({ content: "* {scroll-behavior: auto !important;}" });
     // await applyToJobs(page)
 };
-const searchCat = 'jobs-moldova-developer';
 (async () => {
-    await linkedInParser(url, searchCat, connect);
+    await linkedInParser(url, searchOptions, connect);
 })();
 `https://www.linkedin.com/jobs/search/?f_AL=true&f_E=2%2C4&f_JT=F%2CC&geoId=91000000&keywords=ruby%20on%20rails&location=Canada`;
