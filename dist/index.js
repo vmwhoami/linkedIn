@@ -27,3 +27,4 @@ const rizeTop = true;
 (async () => {
     await gotToAndDo(url, searchCat, rizeTop);
 })();
+`https://www.linkedin.com/jobs/search/?f_AL=true&f_E=2%2C4&f_JT=F%2CC&geoId=91000000&keywords=ruby%20on%20rails&location=Canada`;
