@@ -3,18 +3,19 @@ require('dotenv').config({path: '.env'})
 import { startBrowser } from './startCloseBrowser';
 import login from './login';
 import applyToJobs from "./applyToJobs";
-import risetoTop from './rizeTop';
+import makeConnections from './makeConnections';
 
-const gotToAndDo = async (url: string,search:string,rizeTop:boolean) => {
-  const email = process.env.EMAIL;
-  const password = process.env.PASSWORD;
+const [email, password] = [process.env.EMAIL, process.env.PASSWORD];
+const url = 'https://www.linkedin.com/';
+
+const linkedInParser = async (url: string, search:string, connect: boolean) => {
   const { page } = await startBrowser();
-  page.setViewport({ width: 1000, height: 800 });
+  page.setViewport({ width: 1200, height: 900 });
   await page.goto(url);
   await login(page, email, password);
-  if(rizeTop){ 
-  await risetoTop(page);
-  }
+  
+  connect ? await makeConnections(page) : null;
+ 
   await page.goto(url + search);
   await page.setViewport({ width: 500, height: 1000 });
   await page.addStyleTag({ content: "* {scroll-behavior: auto !important;}" });
@@ -22,13 +23,12 @@ const gotToAndDo = async (url: string,search:string,rizeTop:boolean) => {
 
 }
 
-
-const url = "https://www.linkedin.com";
+ 
 const searchCat = 'jobs-moldova-developer';
-const rizeTop =true;
+const connect =true;
 
 (async () => {
-  await gotToAndDo(url,searchCat,rizeTop);
+  await linkedInParser(url,searchCat,connect);
 })();
 
 `https://www.linkedin.com/jobs/search/?f_AL=true&f_E=2%2C4&f_JT=F%2CC&geoId=91000000&keywords=ruby%20on%20rails&location=Canada`
