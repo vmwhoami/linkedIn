@@ -2,26 +2,46 @@
 require('dotenv').config({path: '.env'})
 import { startBrowser } from './startCloseBrowser';
 import login from './login';
-import applyToJobs from "./applyToJobs";
-import makeConnections from './makeConnections';
+// import applyToJobs from "./applyToJobs";
+// import makeConnections from './makeConnections';
 
-const [email, password] = [process.env.EMAIL, process.env.PASSWORD];
-const url = 'https://www.linkedin.com/';
-const connect =true;
-const searchOptions = {
-  geoUrn: '["103644278"]',
-  keywords: 'it recruiter',
-  origin: 'FACETED_SEARCH',
-  sid: 'rEa'
+// const searchOptions = {
+//   geoUrn: '["103644278"]',
+//   keywords: 'it recruiter',
+//   origin: 'FACETED_SEARCH'
+// };
+type optionTypes = {
+  url:string,
+  viewPortOptions: {
+    width: number,
+    height: number,
+  },
+  browserOptions: {
+    headless: boolean | undefined,
+    slowMo: number | undefined,
+    devtools: boolean | undefined
+  },
+  connect:boolean | undefined,
+  email:string | undefined,
+  password:string | undefined,
+}
+const options = {
+  url: 'https://www.linkedin.com/',
+  viewPortOptions: { width: 1200, height: 900 },
+  browserOptions: { headless: false, slowMo: 30, devtools: false},
+  connect:true,
+  email:process.env.EMAIL,
+  password:process.env.PASSWORD
 };
 
-const linkedInParser = async (url: string, searchOptions:object, connect: boolean) => {
+const linkedInParser = async (options: optionTypes) => {
   const { page } = await startBrowser();
-  page.setViewport({ width: 1200, height: 900 });
+  const{viewPortOptions, email, password ,url} = options;
+  page.setViewport(viewPortOptions);
   await page.goto(url);
   await login(page, email, password);
   
-  connect ? await makeConnections(page, searchOptions) : null;
+  // connect ? await makeConnections(page, searchOptions) : null;
  
   // await page.goto(url + search);
   // await page.setViewport({ width: 500, height: 1000 });
@@ -30,11 +50,8 @@ const linkedInParser = async (url: string, searchOptions:object, connect: boolea
 
 }
 
- 
- 
-
 (async () => {
-  await linkedInParser(url,searchOptions,connect);
+  // await linkedInParser(options);
+  await linkedInParser(options);
 })();
 
-`https://www.linkedin.com/jobs/search/?f_AL=true&f_E=2%2C4&f_JT=F%2CC&geoId=91000000&keywords=ruby%20on%20rails&location=Canada`

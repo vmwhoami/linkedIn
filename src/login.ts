@@ -1,7 +1,8 @@
-const typeEmail = async (page: any, email: string) => {
+ 
+const typeEmail = async (page: any, email: any) => {
   await page.waitForSelector('.input #session_key');
   await page.click('.input #session_key');
-  await page.keyboard.type(email)
+  await page.keyboard.type(email);
 }
 
 const typePassword = async (page: any, password: string) => {
@@ -15,7 +16,7 @@ const signIn = async (page: any) => {
   await page.click('.sign-in-form__submit-button');
 }
 
-const login = async (page: any, email = "hello", password = "world") => {
+const login = async (page: Record<symbol, string>, email = "hello", password = "world"):Promise<void> => {
   try {
     await typeEmail(page, email);
     await typePassword(page, password);

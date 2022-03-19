@@ -4,28 +4,27 @@ Object.defineProperty(exports, "__esModule", { value: true });
 require('dotenv').config({ path: '.env' });
 const startCloseBrowser_1 = require("./startCloseBrowser");
 const login_1 = require("./login");
-const makeConnections_1 = require("./makeConnections");
-const [email, password] = [process.env.EMAIL, process.env.PASSWORD];
-const url = 'https://www.linkedin.com/';
-const connect = true;
-const searchOptions = {
-    geoUrn: '["103644278"]',
-    keywords: 'it recruiter',
-    origin: 'FACETED_SEARCH',
-    sid: 'rEa'
+const options = {
+    url: 'https://www.linkedin.com/',
+    viewPortOptions: { width: 1200, height: 900 },
+    browserOptions: { headless: false, slowMo: 30, devtools: false },
+    connect: true,
+    email: process.env.EMAIL,
+    password: process.env.PASSWORD
 };
-const linkedInParser = async (url, searchOptions, connect) => {
+const linkedInParser = async (options) => {
     const { page } = await (0, startCloseBrowser_1.startBrowser)();
-    page.setViewport({ width: 1200, height: 900 });
+    const { viewPortOptions, email, password, url } = options;
+    page.setViewport(viewPortOptions);
     await page.goto(url);
     await (0, login_1.default)(page, email, password);
-    connect ? await (0, makeConnections_1.default)(page, searchOptions) : null;
+    // connect ? await makeConnections(page, searchOptions) : null;
     // await page.goto(url + search);
     // await page.setViewport({ width: 500, height: 1000 });
     // await page.addStyleTag({ content: "* {scroll-behavior: auto !important;}" });
     // await applyToJobs(page)
 };
 (async () => {
-    await linkedInParser(url, searchOptions, connect);
+    // await linkedInParser(options);
+    await linkedInParser(options);
 })();
-`https://www.linkedin.com/jobs/search/?f_AL=true&f_E=2%2C4&f_JT=F%2CC&geoId=91000000&keywords=ruby%20on%20rails&location=Canada`;
