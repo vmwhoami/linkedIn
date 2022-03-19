@@ -16,8 +16,9 @@ const signIn = async (page) => {
 };
 const login = async (page, loginOptions) => {
     try {
-        await typeEmail(page, loginOptions.email);
-        await typePassword(page, loginOptions.password);
+        const { email, password } = loginOptions;
+        await typeEmail(page, email || '');
+        await typePassword(page, password || '');
         await signIn(page);
     }
     catch (error) {

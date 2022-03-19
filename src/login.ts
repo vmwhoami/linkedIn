@@ -1,25 +1,27 @@
+import OptionTypes from './types'
  
-const typeEmail = async (page: any, email: any) => {
+const typeEmail = async (page: OptionTypes["page"], email: string) => {
   await page.waitForSelector('.input #session_key');
   await page.click('.input #session_key');
   await page.keyboard.type(email);
 }
 
-const typePassword = async (page: any, password: string) => {
+const typePassword = async (page: OptionTypes["page"], password: string) => {
   await page.waitForSelector('.input #session_password');
   await page.click('.input #session_password');
   await page.keyboard.type(password)
 }
 
-const signIn = async (page: any) => {
+const signIn = async (page: OptionTypes["page"]) => {
   await page.waitForSelector('.sign-in-form__submit-button');
   await page.click('.sign-in-form__submit-button');
 }
 
-const login = async (page, loginOptions): Promise<void> => {
+const login = async (page:OptionTypes["page"], loginOptions:OptionTypes["loginOptions"]): Promise<void> => {
   try {
-    await typeEmail(page, loginOptions.email);
-    await typePassword(page,loginOptions.password);
+    const { email, password } = loginOptions;
+    await typeEmail(page, email || '');
+    await typePassword(page,password || '');
     await signIn(page);
   } catch (error) {
     console.log(error);

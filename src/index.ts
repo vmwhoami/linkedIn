@@ -3,7 +3,7 @@ require('dotenv').config({ path: '.env' })
 import OptionTypes from './types'
 import { startBrowser } from './startCloseBrowser';
 import login from './login';
-// import makeConnections from './makeConnections';
+import makeConnections from './makeConnections';
 // import applyToJobs from "./applyToJobs";
 
 
@@ -16,17 +16,27 @@ const options = {
     email: process.env.EMAIL,
     password: process.env.PASSWORD
   },
-  connectOptions: {}
+  connectOptions: {
+    
+  }
 };
 
 const linkedInParser = async (options: OptionTypes) => {
-  const { browserOptions, viewPortOptions,url,loginOptions} = options;
-  const { page }:OptionTypes["page"] = await startBrowser(browserOptions);
+  const {
+    browserOptions,
+    viewPortOptions,
+    url,
+    loginOptions,
+    connect,
+    connectOptions
+  } = options;
+
+  const { page }: OptionTypes["page"] = await startBrowser(browserOptions);
   page.setViewport(viewPortOptions);
   await page.goto(url);
   await login(page, loginOptions);
 
-  // connect ? await makeConnections(page, connectOptions) : null;
+  connect ? await makeConnections(page, connectOptions) : null;
 
   // await page.goto(url + search);
   // await page.setViewport({ width: 500, height: 1000 });

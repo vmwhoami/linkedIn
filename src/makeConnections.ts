@@ -1,6 +1,6 @@
+import OptionTypes from './types'
 
-
-const makeConnections = async(page:any,searchOptions:Record <string,unknown>):Promise<void>=>{
+const makeConnections = async(page:OptionTypes["page"],searchOptions:Record <string,unknown>):Promise<void>=>{
   await page.goto(link);
   ({
     geoUrn: geoUrn,
