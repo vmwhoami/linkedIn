@@ -6,6 +6,15 @@ import login from './login';
 import makeConnections from './makeConnections';
 // import applyToJobs from "./applyToJobs";
 
+const locations = {
+  'New York': '105080838',
+  'San Francisco': '90000084',
+  'Chicago': '103112676',
+  'Los Angeles': '102448103',
+  'Miami': '102394087',
+  'Philadelphia': '104937023',
+  'Atlanta': '106224388',
+}
 
 const options = {
   url: 'https://www.linkedin.com/',
@@ -17,7 +26,7 @@ const options = {
     password: process.env.PASSWORD
   },
   connectOptions: {
-    
+
   }
 };
 
@@ -36,7 +45,7 @@ const linkedInParser = async (options: OptionTypes) => {
   await page.goto(url);
   await login(page, loginOptions);
 
-  connect ? await makeConnections(page, connectOptions) : null;
+  connect ? await makeConnections(page, url,connectOptions) : null;
 
   // await page.goto(url + search);
   // await page.setViewport({ width: 500, height: 1000 });
