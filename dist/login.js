@@ -14,10 +14,10 @@ const signIn = async (page) => {
     await page.waitForSelector('.sign-in-form__submit-button');
     await page.click('.sign-in-form__submit-button');
 };
-const login = async (page, email = "hello", password = "world") => {
+const login = async (page, loginOptions) => {
     try {
-        await typeEmail(page, email);
-        await typePassword(page, password);
+        await typeEmail(page, loginOptions.email);
+        await typePassword(page, loginOptions.password);
         await signIn(page);
     }
     catch (error) {

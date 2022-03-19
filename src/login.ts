@@ -16,10 +16,10 @@ const signIn = async (page: any) => {
   await page.click('.sign-in-form__submit-button');
 }
 
-const login = async (page: Record<symbol, string>, email = "hello", password = "world"):Promise<void> => {
+const login = async (page, loginOptions): Promise<void> => {
   try {
-    await typeEmail(page, email);
-    await typePassword(page, password);
+    await typeEmail(page, loginOptions.email);
+    await typePassword(page,loginOptions.password);
     await signIn(page);
   } catch (error) {
     console.log(error);
