@@ -16,6 +16,15 @@ const locations = {
   'Atlanta': '106224388',
 }
 
+const keywords = {
+  'tech recruiter': 'tech recruiter',
+  'it recruiter': 'it recruiter',
+  'software recruiter': 'software recruiter',
+  'frontend recruiter': 'frontend recruiter',
+  'backend recruiter': 'backend recruiter'
+}
+// https://www.linkedin.com/search/results/people/?geoUrn=%5B%22102394087%22%5D&keywords=tech%20recruiter&origin=FACETED_SEARCH&sid=FeL
+
 const options = {
   url: 'https://www.linkedin.com/',
   viewPortOptions: { width: 1200, height: 900 },
@@ -26,7 +35,11 @@ const options = {
     password: process.env.PASSWORD
   },
   connectOptions: {
-
+    people: 'search/results/people/?geoUrn=%5B%',
+    region: locations['New York'],
+    beforeKeword: '%22%5D&keywords=',
+    keywords: `${keywords['tech recruiter']}`,
+    Headers: '%20&origin=GLOBAL_SEARCH_HEADER'
   }
 };
 

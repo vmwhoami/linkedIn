@@ -19,9 +19,8 @@ interface OptionTypes {
   },
   
   connectOptions: {
-    geoUrn: string | undefined,
-    keywords: string | undefined,
-    origin: string | undefined,
+    region: string | undefined,
+ 
   }
 }
 
