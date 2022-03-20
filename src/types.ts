@@ -20,7 +20,9 @@ interface OptionTypes {
   
   connectOptions: {
     region: string | undefined,
- 
+    people: string | undefined,
+    beforeKeword: string | undefined,
+    keywords: string | undefined,
   }
 }
 
