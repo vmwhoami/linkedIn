@@ -3,7 +3,7 @@ import OptionTypes from './types'
 function modifiedUrl(url: OptionTypes["url"], connectOptions: OptionTypes["connectOptions"]): string {
   const { region,people,beforeKeword,keywords} = connectOptions;
  
-  return `${url}${people}"${region}${beforeKeword}${keywords?.split(' ').join('%20')}`
+  return `${url}${people}${region}${beforeKeword}${keywords?.split(' ').join('%20')}`
 }
 const makeConnections = async (
   page: OptionTypes["page"],

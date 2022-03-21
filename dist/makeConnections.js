@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 function modifiedUrl(url, connectOptions) {
     const { region, people, beforeKeword, keywords } = connectOptions;
-    return `${url}${people}"${region}${beforeKeword}${keywords?.split(' ').join('%20')}`;
+    return `${url}${people}${region}${beforeKeword}${keywords?.split(' ').join('%20')}`;
 }
 const makeConnections = async (page, url, connectOptions) => {
     const modified = modifiedUrl(url, connectOptions);

@@ -34,7 +34,7 @@ const options = {
     password: process.env.PASSWORD
   },
   connectOptions: {
-    people: 'search/results/people/?geoUrn=%5B',
+    people: 'search/results/people/?geoUrn=%5B"',
     region: locations['New York'],
     beforeKeword: '%22%5D&keywords=',
     keywords: `${keywords['tech recruiter']}`,
