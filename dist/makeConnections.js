@@ -7,8 +7,31 @@ function modifiedUrl(url, connectOptions) {
 const makeConnections = async (page, url, connectOptions) => {
     const modified = modifiedUrl(url, connectOptions);
     await page.goto(modified);
+    await connect(page);
 };
-// https://www.linkedin.com/search/results/people/?geoUrn=%5B%%22105080838%22%22%5D&keywords=tech%20recruiter
-// WORKING_LINK https://www.linkedin.com/search/results/people/?geoUrn=%5B%22103644278%22%5D&keywords=it%20recruiter
 exports.default = makeConnections;
-// https://www.linkedin.com/search/results/people/?geoUrn=%5B
+// const loopFunc = async (elements_arr: any, page: any) => {
+//   while (elements_arr.length > 0) {
+//     const selectedElement = elements_arr.shift()
+//     await selectedElement.click();
+//     // await sendCV(page);
+//   }
+// }
+const connect = async (page) => {
+    try {
+        const elementsHendles = await page.evaluateHandle(() => document.querySelectorAll('.artdeco-button artdeco-button--2 artdeco-button--secondary ember-view'));
+        const elements = await elementsHendles.getProperties();
+        console.log(elements);
+        // const children: any = [];
+        // for (const property of elements.values()) {
+        //   const element = property.asElement();
+        //   if (element)
+        //     children.push(element);
+        // }
+        // console.log(children);
+        // await loopFunc(children, page)
+    }
+    catch (error) {
+        console.log(error);
+    }
+};

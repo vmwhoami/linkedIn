@@ -43,21 +43,19 @@ const options = {
 };
 
 const linkedInParser = async (options: OptionTypes) => {
-  const {
-    browserOptions,
-    viewPortOptions,
-    url,
-    loginOptions,
-    connect,
-    connectOptions
-  } = options;
+  const { browserOptions,
+          viewPortOptions,
+          url,
+          loginOptions,
+          connect,
+          connectOptions } = options;
 
   const { page }: OptionTypes["page"] = await startBrowser(browserOptions);
   page.setViewport(viewPortOptions);
   await page.goto(url);
   await login(page, loginOptions);
 
-  connect ? await makeConnections(page, url,connectOptions) : null;
+  connect ? await makeConnections(page, url, connectOptions) : null;
 
   // await page.goto(url + search);
   // await page.setViewport({ width: 500, height: 1000 });
