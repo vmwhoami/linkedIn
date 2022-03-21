@@ -11,6 +11,7 @@ const makeConnections = async ( page: OptionTypes["page"],
 
   const modified: string = modifiedUrl(url, connectOptions);
   await page.goto(modified);
+  await page.waitForSelector('.artdeco-button artdeco-button--2 artdeco-button--secondary ember-view');
   await connect(page);
 }
 

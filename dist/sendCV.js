@@ -7,12 +7,8 @@ const pathFileWin = path.resolve('dist', 'cvs', 'VITALIEMELNIC.docx');
 const fileExistsMac = fs.existsSync(`${pathFileMac}/VITALIEMELNIC.pdf`);
 const fileExistsWin = fs.existsSync(pathFileWin);
 const uploadCV = async (fileExistsMac, fileExistsWin, elementHandle) => {
-    if (fileExistsMac) {
-        await elementHandle.uploadFile(`${pathFileMac}/VITALIEMELNIC.pdf`);
-    }
-    else if (fileExistsWin) {
-        await elementHandle.uploadFile(`${pathFileWin}`);
-    }
+    fileExistsMac ? await elementHandle.uploadFile(`${pathFileMac}/VITALIEMELNIC.pdf`) : null;
+    fileExistsWin ? await elementHandle.uploadFile(pathFileWin) : null;
 };
 const SendCV = async (page) => {
     await page.waitForTimeout(500);

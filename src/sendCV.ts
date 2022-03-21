@@ -8,11 +8,8 @@ const fileExistsWin = fs.existsSync(pathFileWin);
 type uploadCV=(a:boolean,b:boolean,c:any)=>void;
 
 const uploadCV = async (fileExistsMac: boolean,fileExistsWin:boolean, elementHandle: any) => {
-  if (fileExistsMac ) {
-    await elementHandle.uploadFile(`${pathFileMac}/VITALIEMELNIC.pdf`);
-  }else if(fileExistsWin){
-    await elementHandle.uploadFile(`${pathFileWin}`);
-  }
+  fileExistsMac ? await elementHandle.uploadFile(`${pathFileMac}/VITALIEMELNIC.pdf`) : null;
+  fileExistsWin ? await elementHandle.uploadFile(pathFileWin) : null;
 };
 
 const SendCV = async (page: any) => {

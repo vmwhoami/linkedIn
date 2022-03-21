@@ -7,6 +7,7 @@ function modifiedUrl(url, connectOptions) {
 const makeConnections = async (page, url, connectOptions) => {
     const modified = modifiedUrl(url, connectOptions);
     await page.goto(modified);
+    await page.waitForSelector('.artdeco-button artdeco-button--2 artdeco-button--secondary ember-view');
     await connect(page);
 };
 exports.default = makeConnections;
