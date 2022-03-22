@@ -22,6 +22,7 @@ const connect = async (page) => {
         await page.waitForTimeout(500);
         const elementsHendles = await page.evaluateHandle(() => document.querySelectorAll('.artdeco-button artdeco-button--2 artdeco-button--secondary ember-view'));
         const elements = await elementsHendles.getProperties();
+        // https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_element_queryselectorall_class
         // const children: any = [];
         // for (const property of elements.values()) {
         //   const element = property.asElement();
