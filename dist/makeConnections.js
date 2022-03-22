@@ -7,7 +7,6 @@ function modifiedUrl(url, connectOptions) {
 const makeConnections = async (page, url, connectOptions) => {
     const modified = modifiedUrl(url, connectOptions);
     await page.goto(modified);
-    await page.waitForSelector('.artdeco-button artdeco-button--2 artdeco-button--secondary ember-view');
     await connect(page);
 };
 exports.default = makeConnections;
@@ -20,9 +19,9 @@ exports.default = makeConnections;
 // }
 const connect = async (page) => {
     try {
+        await page.waitForTimeout(500);
         const elementsHendles = await page.evaluateHandle(() => document.querySelectorAll('.artdeco-button artdeco-button--2 artdeco-button--secondary ember-view'));
         const elements = await elementsHendles.getProperties();
-        console.log(elements);
         // const children: any = [];
         // for (const property of elements.values()) {
         //   const element = property.asElement();

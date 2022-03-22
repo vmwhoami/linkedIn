@@ -11,7 +11,6 @@ const makeConnections = async ( page: OptionTypes["page"],
 
   const modified: string = modifiedUrl(url, connectOptions);
   await page.goto(modified);
-  await page.waitForSelector('.artdeco-button artdeco-button--2 artdeco-button--secondary ember-view');
   await connect(page);
 }
 
@@ -28,9 +27,11 @@ export default makeConnections;
 
 const connect = async (page: any) => {
   try {
+    await page.waitForTimeout(500);
     const elementsHendles = await page.evaluateHandle(() => document.querySelectorAll('.artdeco-button artdeco-button--2 artdeco-button--secondary ember-view')!);
     const elements = await elementsHendles.getProperties();
-    console.log(elements);
+    
+    
     
     // const children: any = [];
     // for (const property of elements.values()) {
