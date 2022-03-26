@@ -20,17 +20,15 @@ exports.default = makeConnections;
 const connect = async (page) => {
     try {
         await page.waitForTimeout(500);
-        const elementsHendles = await page.evaluateHandle(() => document.querySelectorAll('.artdeco-button.artdeco-button--2.artdeco-button--secondary.ember-view'));
-        // const elements = await elementsHendles.getProperties();
-        // console.log(elements);
-        // https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_element_queryselectorall_class
-        // const children: any = [];
-        // for (const property of elements.values()) {
-        //   const element = property.asElement();
-        //   if (element)
-        //     children.push(element);
-        // }
-        // console.log(children);
+        const elementsHendles = await page.evaluateHandle(() => document.querySelectorAll('.entity-result__item .artdeco-button.artdeco-button--2.artdeco-button--secondary.ember-view'));
+        const elements = await elementsHendles.getProperties();
+        const children = [];
+        for (const property of elements.values()) {
+            const element = property.asElement();
+            if (element)
+                children.push(element);
+        }
+        console.log(children);
         // await loopFunc(children, page)
     }
     catch (error) {
