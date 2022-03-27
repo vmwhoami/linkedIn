@@ -4,7 +4,6 @@ import OptionTypes from './types'
 import { startBrowser } from './startCloseBrowser';
 import login from './login';
 import makeConnections from './makeConnections';
-// import applyToJobs from "./applyToJobs";
 
 const locations = {
   'New York': '105080838',
@@ -33,6 +32,7 @@ const options = {
     email: process.env.EMAIL,
     password: process.env.PASSWORD
   },
+
   connectOptions: {
     people: 'search/results/people/?geoUrn=%5B"',
     region: locations['New York'],

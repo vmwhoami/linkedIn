@@ -5,7 +5,6 @@ require('dotenv').config({ path: '.env' });
 const startCloseBrowser_1 = require("./startCloseBrowser");
 const login_1 = require("./login");
 const makeConnections_1 = require("./makeConnections");
-// import applyToJobs from "./applyToJobs";
 const locations = {
     'New York': '105080838',
     'San Francisco': '90000084',
