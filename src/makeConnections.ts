@@ -1,19 +1,13 @@
 import OptionTypes from './types'
+import urlModifier  from './connect/connectionsUrl';
 
-function modifiedUrl(url: OptionTypes["url"], connectOptions: OptionTypes["connectOptions"]): string {
-  const { region, people, beforeKeword, keywords } = connectOptions;
-
-  return `${url}${people}${region}${beforeKeword}${keywords?.split(' ').join('%20')}`
-}
 const makeConnections = async ( page: OptionTypes["page"],
                                 url: OptionTypes["url"], 
                                 connectOptions: OptionTypes["connectOptions"] ): Promise<void> => {
 
-  const modified: string = modifiedUrl(url, connectOptions);
+  const modified: string = urlModifier(url, connectOptions);
   await page.goto(modified);
   await connect(page);
-
-
 }
 
 export default makeConnections;
@@ -23,14 +17,12 @@ const loopFunc = async (elements_arr: any, page: any) => {
   while (elements_arr.length > 0) {
     const selectedElement = elements_arr.shift()
     await selectedElement.click();
-
-    // await sendCV(page);
     
   }
 }
 
 const goThroughPages = async (page: any) => {
-  const pages: any = await page.$$('.pagination a');
+  const pages: any = await page.$$('.artdeco-pagination__button.artdeco-pagination__button--next.artdeco-button.artdeco-button--muted.artdeco-button--icon-right artdeco-button--1.artdeco-button--tertiary.ember-view');
   const pages_arr: any = [];
   for (let i = 0; i < pages.length; i++) {
     pages_arr.push(pages[i]);

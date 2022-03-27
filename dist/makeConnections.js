@@ -1,11 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-function modifiedUrl(url, connectOptions) {
-    const { region, people, beforeKeword, keywords } = connectOptions;
-    return `${url}${people}${region}${beforeKeword}${keywords?.split(' ').join('%20')}`;
-}
+const connectionsUrl_1 = require("./connect/connectionsUrl");
 const makeConnections = async (page, url, connectOptions) => {
-    const modified = modifiedUrl(url, connectOptions);
+    const modified = (0, connectionsUrl_1.default)(url, connectOptions);
     await page.goto(modified);
     await connect(page);
 };
@@ -14,11 +11,10 @@ const loopFunc = async (elements_arr, page) => {
     while (elements_arr.length > 0) {
         const selectedElement = elements_arr.shift();
         await selectedElement.click();
-        // await sendCV(page);
     }
 };
 const goThroughPages = async (page) => {
-    const pages = await page.$$('.pagination a');
+    const pages = await page.$$('.artdeco-pagination__button.artdeco-pagination__button--next.artdeco-button.artdeco-button--muted.artdeco-button--icon-right artdeco-button--1.artdeco-button--tertiary.ember-view');
     const pages_arr = [];
     for (let i = 0; i < pages.length; i++) {
         pages_arr.push(pages[i]);
