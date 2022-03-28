@@ -20,8 +20,6 @@ const loopFunc = async (elements_arr: any, page: any) => {
 
     // waits for the connect button to be visible
     const selector = await page.waitForSelector('.artdeco-modal__actionbar.ember-view.text-align-right .ml1');
-    console.log(selector);
-    console.log(!selector);
     
     
     if (!selector) continue;
@@ -43,9 +41,9 @@ const connect = async (page: any) => {
     await page.waitForTimeout(500);
     const elementsHendles = await page.evaluateHandle(() => {
       return document
-        .querySelectorAll('.entity-result__item .artdeco-button.artdeco-button--2.artdeco-button--secondary.ember-view')
+      .querySelectorAll('.entity-result__item .artdeco-button.artdeco-button--2.artdeco-button--secondary.ember-view:not(.artdeco-button--muted)')
     });
-
+ 
     const elements: any = await elementsHendles.getProperties();
 
     const children: any = [];
