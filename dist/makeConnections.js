@@ -28,8 +28,8 @@ const connect = async (page) => {
     try {
         await page.waitForTimeout(500);
         const elementsHendles = await page.evaluateHandle(() => {
-            return document
-                .querySelectorAll('.entity-result__item .artdeco-button.artdeco-button--2.artdeco-button--secondary.ember-view:not(.artdeco-button--muted)');
+            const spans = document.querySelectorAll('.entity-result__item .artdeco-button.artdeco-button--2.artdeco-button--secondary.ember-view:not(.artdeco-button--muted)');
+            return [...spans].filter(span => span.textContent.replace(/\n/g, '').trim() === "Connect");
         });
         const elements = await elementsHendles.getProperties();
         const children = [];

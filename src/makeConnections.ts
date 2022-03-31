@@ -17,7 +17,7 @@ const loopFunc = async (elements_arr: any, page: any) => {
     const selectedElement = elements_arr.shift()
     await selectedElement.click();
 
-
+     
     // waits for the connect button to be visible
     const selector = await page.waitForSelector('.artdeco-modal__actionbar.ember-view.text-align-right .ml1');
     
@@ -40,8 +40,8 @@ const connect = async (page: any) => {
   try {
     await page.waitForTimeout(500);
     const elementsHendles = await page.evaluateHandle(() => {
-      return document
-      .querySelectorAll('.entity-result__item .artdeco-button.artdeco-button--2.artdeco-button--secondary.ember-view:not(.artdeco-button--muted)')
+     const spans = document.querySelectorAll('.entity-result__item .artdeco-button.artdeco-button--2.artdeco-button--secondary.ember-view:not(.artdeco-button--muted)')
+      return [...spans].filter(span => span.textContent.replace(/\n/g, '').trim() === "Connect" )
     });
  
     const elements: any = await elementsHendles.getProperties();
