@@ -17,15 +17,15 @@ const loopFunc = async (elements_arr: any, page: any) => {
     const selectedElement = elements_arr.shift()
     await selectedElement.click();
 
-     
+
     // waits for the connect button to be visible
     const selector = await page.waitForSelector('.artdeco-modal__actionbar.ember-view.text-align-right .ml1');
-    
-    
+
+
     if (!selector) continue;
-    await page.click('.artdeco-modal__actionbar.ember-view.text-align-right .ml1')  
- 
-   // Place the press connect button here
+    await page.click('.artdeco-modal__actionbar.ember-view.text-align-right .ml1')
+
+    // Place the press connect button here
   }
 }
 // await for selector
@@ -40,10 +40,10 @@ const connect = async (page: any) => {
   try {
     await page.waitForTimeout(500);
     const elementsHendles = await page.evaluateHandle(() => {
-     const spans = document.querySelectorAll('.entity-result__item .artdeco-button.artdeco-button--2.artdeco-button--secondary.ember-view:not(.artdeco-button--muted)')
-      return [...spans].filter(span => span.textContent.replace(/\n/g, '').trim() === "Connect" )
+      const spans = document.querySelectorAll('.entity-result__item .artdeco-button.artdeco-button--2.artdeco-button--secondary.ember-view:not(.artdeco-button--muted)')
+      return [...spans].filter(span => span.textContent.replace(/\n/g, '').trim() === "Connect")
     });
- 
+
     const elements: any = await elementsHendles.getProperties();
 
     const children: any = [];
