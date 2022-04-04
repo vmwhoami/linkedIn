@@ -22,7 +22,8 @@ const loopFunc = async (elements_arr, page) => {
 // await for selector
 //document.querySelector('.artdeco-modal__actionbar.ember-view.text-align-right .ml1')
 const goToNextPage = async (page) => {
-    const pages = await page.$$('.artdeco-pagination__button.artdeco-pagination__button--next.artdeco-button.artdeco-button--muted.artdeco-button--icon-right artdeco-button--1.artdeco-button--tertiary.ember-view');
+    const pages = await page.querySelector('.artdeco-pagination__button.artdeco-pagination__button--next.artdeco-button.artdeco-button--muted.artdeco-button--icon-right artdeco-button--1.artdeco-button--tertiary.ember-view');
+    await page.waitForTimeout(500);
 };
 const connect = async (page) => {
     try {

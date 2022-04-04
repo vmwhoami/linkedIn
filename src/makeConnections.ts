@@ -11,7 +11,6 @@ const makeConnections = async (page: OptionTypes["page"],
 
 export default makeConnections;
 
-
 const loopFunc = async (elements_arr: any, page: any) => {
   while (elements_arr.length > 0) {
     const selectedElement = elements_arr.shift()
@@ -32,8 +31,8 @@ const loopFunc = async (elements_arr: any, page: any) => {
 //document.querySelector('.artdeco-modal__actionbar.ember-view.text-align-right .ml1')
 
 const goToNextPage = async (page: any) => {
-  const pages: any = await page.$$('.artdeco-pagination__button.artdeco-pagination__button--next.artdeco-button.artdeco-button--muted.artdeco-button--icon-right artdeco-button--1.artdeco-button--tertiary.ember-view');
-
+  const pages: any = await page.querySelector('.artdeco-pagination__button.artdeco-pagination__button--next.artdeco-button.artdeco-button--muted.artdeco-button--icon-right artdeco-button--1.artdeco-button--tertiary.ember-view');
+  await page.waitForTimeout(500);
 }
 
 const connect = async (page: any) => {
