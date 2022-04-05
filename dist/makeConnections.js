@@ -19,15 +19,17 @@ const loopFunc = async (elements_arr, page) => {
         // Place the press connect button here
     }
 };
-// await for selector
-//document.querySelector('.artdeco-modal__actionbar.ember-view.text-align-right .ml1')
 const goToNextPage = async (page) => {
-    const pages = await page.querySelector('.artdeco-pagination__button.artdeco-pagination__button--next.artdeco-button.artdeco-button--muted.artdeco-button--icon-right artdeco-button--1.artdeco-button--tertiary.ember-view');
-    await page.waitForTimeout(500);
+    await page.evaluate(() => {
+        window.scrollBy(0, window.innerHeight);
+    });
+    await page.waitForSelector('.artdeco-pagination__button.artdeco-pagination__button--next.artdeco-button.artdeco-button--muted.artdeco-button--icon-right');
+    await page.click('.artdeco-pagination__button.artdeco-pagination__button--next.artdeco-button.artdeco-button--muted.artdeco-button--icon-right');
 };
 const connect = async (page) => {
     try {
-        await page.waitForTimeout(500);
+        await goToNextPage(page);
+        await page.waitForTimeout(5000);
         const elementsHendles = await page.evaluateHandle(() => {
             const spans = document.querySelectorAll('.entity-result__item .artdeco-button.artdeco-button--2.artdeco-button--secondary.ember-view:not(.artdeco-button--muted)');
             return [...spans].filter(span => span.textContent.replace(/\n/g, '').trim() === "Connect");
