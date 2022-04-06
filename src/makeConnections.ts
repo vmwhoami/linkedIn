@@ -44,7 +44,7 @@ const connect = async (page: any) => {
     const elementsHendles = await page.evaluateHandle(() => {
       const spans = document.querySelectorAll('.entity-result__item .artdeco-button.artdeco-button--2.artdeco-button--secondary.ember-view:not(.artdeco-button--muted)')
 
-      return [...spans].filter(span => span.textContent.replace(/\n/g, '').trim() === "Connect")
+      return [...spans].filter(span => span.textContent!.replace(/\n/g, '').trim() === "Connect")
     });
 
     const elements: any = await elementsHendles.getProperties();
