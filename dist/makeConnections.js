@@ -20,16 +20,23 @@ const loopFunc = async (elements_arr, page) => {
     }
 };
 const goToNextPage = async (page) => {
-    await page.evaluate(() => {
-        window.scrollBy(0, window.innerHeight);
-    });
+    await page.evaluate(() => { window.scrollBy(0, window.innerHeight); });
     await page.waitForSelector('.artdeco-pagination__button.artdeco-pagination__button--next.artdeco-button.artdeco-button--muted.artdeco-button--icon-right');
     await page.click('.artdeco-pagination__button.artdeco-pagination__button--next.artdeco-button.artdeco-button--muted.artdeco-button--icon-right');
 };
 const connect = async (page) => {
     try {
-        await goToNextPage(page);
-        await page.waitForTimeout(5000);
+        // Take a look at the generated code maybe something like this
+        // While some conditions are met, keep clicking the connect button
+        // while (true) {
+        //   // Get the list of elements that are connectable
+        //   const elements_arr = await page.$$('.artdeco-button.artdeco-button--muted.artdeco-button--icon-right.artdeco-button--2.ember-view');
+        //   // If there are no elements, then we are done
+        //   if (elements_arr.length === 0) break;
+        //   // Loop through the elements and click the connect button
+        //   await loopFunc(elements_arr, page);
+        //   // Go to the next page
+        // await goToNextPage(page);
         const elementsHendles = await page.evaluateHandle(() => {
             const spans = document.querySelectorAll('.entity-result__item .artdeco-button.artdeco-button--2.artdeco-button--secondary.ember-view:not(.artdeco-button--muted)');
             return [...spans].filter(span => span.textContent.replace(/\n/g, '').trim() === "Connect");
