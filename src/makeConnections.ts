@@ -28,12 +28,10 @@ const goToNextPage = async (page: any) => {
 }
 
 const connect = async (page: any) => {
-  let children = await btnCollector(page);
-  await connecterMethod(children, page);
-  if (children.length === 0) {
-    await goToNextPage(page);
-    children = await btnCollector(page);
+  while (true) {
+    const children = await btnCollector(page);
     await connecterMethod(children, page);
+    await goToNextPage(page);
   }
 }
 
