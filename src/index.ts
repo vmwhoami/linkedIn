@@ -35,7 +35,7 @@ const options = {
 
   connectOptions: {
     people: 'search/results/people/?geoUrn=%5B"',
-    region: locations['Chicago'],
+    region: locations['Los Angeles'],
     beforeKeword: '%22%5D&keywords=',
     keywords: `${keywords['tech recruiter']}`,
     Headers: '%20&origin=GLOBAL_SEARCH_HEADER'

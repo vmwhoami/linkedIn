@@ -22,39 +22,19 @@ const goToNextPage = async (page) => {
     await page.click('.artdeco-pagination__button.artdeco-pagination__button--next.artdeco-button.artdeco-button--muted.artdeco-button--icon-right');
 };
 const connect = async (page) => {
-    try {
-        // Starts here collects all btns
-        const elementsHendles = await page.evaluateHandle(() => {
-            const spans = document.querySelectorAll('.entity-result__item .artdeco-button.artdeco-button--2.artdeco-button--secondary.ember-view:not(.artdeco-button--muted)');
-            return [...spans].filter(span => span.textContent.replace(/\n/g, '').trim() === "Connect");
-        });
-        const elements = await elementsHendles.getProperties();
-        const children = [];
-        for (const property of elements.values()) {
-            const element = property.asElement();
-            element ? children.push(element) : null;
-        }
-        await connecterMethod(children, page);
-    }
-    catch (error) {
-        console.log(error);
-    }
+    let children = await btnCollector(page);
+    return connecterMethod(children, page);
 };
 const btnCollector = async (page) => {
-    try {
-        const elementsHendles = await page.evaluateHandle(() => {
-            const spans = document.querySelectorAll('.entity-result__item .artdeco-button.artdeco-button--2.artdeco-button--secondary.ember-view:not(.artdeco-button--muted)');
-            return [...spans].filter(span => span.textContent.replace(/\n/g, '').trim() === "Connect");
-        });
-        const elements = await elementsHendles.getProperties();
-        const children = [];
-        for (const property of elements.values()) {
-            const element = property.asElement();
-            element ? children.push(element) : null;
-        }
-        await connecterMethod(children, page);
+    const children = [];
+    const elementsHendles = await page.evaluateHandle(() => {
+        const spans = document.querySelectorAll('.entity-result__item .artdeco-button.artdeco-button--2.artdeco-button--secondary.ember-view:not(.artdeco-button--muted)');
+        return [...spans].filter(span => span.textContent.replace(/\n/g, '').trim() === "Connect");
+    });
+    const elements = await elementsHendles.getProperties();
+    for (const property of elements.values()) {
+        const element = property.asElement();
+        element ? children.push(element) : null;
     }
-    catch (error) {
-        console.log(error);
-    }
+    return children;
 };
