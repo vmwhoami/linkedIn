@@ -14,7 +14,6 @@ const connecterMethod = async (elements_arr, page) => {
         await page.waitForSelector('.artdeco-modal__actionbar.ember-view.text-align-right .ml1');
         await page.click('.artdeco-modal__actionbar.ember-view.text-align-right .ml1');
     }
-    await goToNextPage(page);
 };
 const goToNextPage = async (page) => {
     await page.evaluate(() => { window.scrollBy(0, window.innerHeight); });
@@ -23,12 +22,18 @@ const goToNextPage = async (page) => {
 };
 const connect = async (page) => {
     let children = await btnCollector(page);
-    return connecterMethod(children, page);
+    await connecterMethod(children, page);
+    if (children.length === 0) {
+        await goToNextPage(page);
+        children = await btnCollector(page);
+        await connecterMethod(children, page);
+    }
 };
 const btnCollector = async (page) => {
+    await page.waitForSelector('.entity-result__item .artdeco-button.artdeco-button--2.artdeco-button--secondary.ember-view');
     const children = [];
-    const elementsHendles = await page.evaluateHandle(() => {
-        const spans = document.querySelectorAll('.entity-result__item .artdeco-button.artdeco-button--2.artdeco-button--secondary.ember-view:not(.artdeco-button--muted)');
+    const elementsHendles = await page.evaluateHandle(async () => {
+        const spans = await document.querySelectorAll('.entity-result__item .artdeco-button.artdeco-button--2.artdeco-button--secondary.ember-view:not(.artdeco-button--muted)');
         return [...spans].filter(span => span.textContent.replace(/\n/g, '').trim() === "Connect");
     });
     const elements = await elementsHendles.getProperties();
