@@ -1,13 +1,14 @@
-import btnCollector from './btnCollector';
-import connecterMethod from './connecterMethod';
-import goToNextPage from './goToNextPage';
+import OptionTypes from '../types'
+import urlModifier from './connectionsUrl';
+import makeConnectionsLoop from './makeConnectionsLoop';
 
-const connect = async (page: any) => {
-  while (true) {
-    const children = await btnCollector(page);
-    await connecterMethod(children, page);
-    await goToNextPage(page);
-  }
+const connect = async (page: OptionTypes["page"],
+  url: OptionTypes["url"],
+  connectOptions: OptionTypes["connectOptions"]): Promise<void> => {
+  const modified: string = urlModifier(url, connectOptions);
+  await page.goto(modified);
+  await makeConnectionsLoop(page);
 }
+
 
 export default connect;

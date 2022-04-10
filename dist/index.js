@@ -4,7 +4,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 require('dotenv').config({ path: '.env' });
 const startCloseBrowser_1 = require("./startCloseBrowser");
 const login_1 = require("./login");
-const makeConnections_1 = require("./makeConnections");
+const connect_1 = require("./connect/connect");
 const locations = {
     'New York': '105080838',
     'San Francisco': '90000084',
@@ -44,7 +44,7 @@ const linkedInParser = async (options) => {
     page.setViewport(viewPortOptions);
     await page.goto(url);
     await (0, login_1.default)(page, loginOptions);
-    connect ? await (0, makeConnections_1.default)(page, url, connectOptions) : null;
+    connect ? await (0, connect_1.default)(page, url, connectOptions) : null;
     // await page.goto(url + search);
     // await page.setViewport({ width: 500, height: 1000 });
     // await page.addStyleTag({ content: "* {scroll-behavior: auto !important;}" });

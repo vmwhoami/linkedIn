@@ -3,7 +3,7 @@ require('dotenv').config({ path: '.env' })
 import OptionTypes from './types'
 import { startBrowser } from './startCloseBrowser';
 import login from './login';
-import makeConnections from './makeConnections';
+import connectFunction from './connect/connect';
 
 const locations = {
   'New York': '105080838',
@@ -55,7 +55,7 @@ const linkedInParser = async (options: OptionTypes) => {
   await page.goto(url);
   await login(page, loginOptions);
 
-  connect ? await makeConnections(page, url, connectOptions) : null;
+  connect ? await connectFunction(page, url, connectOptions) : null;
 
   // await page.goto(url + search);
   // await page.setViewport({ width: 500, height: 1000 });
