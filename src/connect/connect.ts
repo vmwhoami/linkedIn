@@ -1,3 +1,4 @@
+import btnCollector from './btnCollector';
 import connecterMethod from './connecterMethod';
 import goToNextPage from './goToNextPage';
 
