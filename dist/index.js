@@ -25,7 +25,7 @@ const options = {
     url: 'https://www.linkedin.com/',
     viewPortOptions: { width: 1200, height: 900 },
     browserOptions: { headless: false, slowMo: 30, devtools: false },
-    connect: true,
+    connect: false,
     loginOptions: {
         email: process.env.EMAIL,
         password: process.env.PASSWORD
@@ -36,6 +36,9 @@ const options = {
         beforeKeword: '%22%5D&keywords=',
         keywords: `${keywords['tech recruiter']}`,
         Headers: '%20&origin=GLOBAL_SEARCH_HEADER'
+    },
+    messageOptions: {
+        url: 'mynetwork/invite-connect/connections/',
     }
 };
 const linkedInParser = async (options) => {
