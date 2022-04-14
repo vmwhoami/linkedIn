@@ -13,6 +13,7 @@ const linkedInParser = async (options) => {
     await page.goto(url);
     await (0, login_1.default)(page, loginOptions);
     connect ? await (0, connect_1.default)(page, url, connectOptions) : null;
+    sendMessages ? await sendMessages(page, url, sendMessagesOptions) : null;
     // await page.goto(url + search);
     // await page.setViewport({ width: 500, height: 1000 });
     // await page.addStyleTag({ content: "* {scroll-behavior: auto !important;}" });

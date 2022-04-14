@@ -32,6 +32,7 @@ const options = {
         keywords: `${keywords['it recruiter']}`,
         Headers: '%20&origin=GLOBAL_SEARCH_HEADER'
     },
+    sendMessagesOptions: {},
     messageOptions: {
         url: 'mynetwork/invite-connect/connections/',
     }

@@ -22,6 +22,8 @@ const linkedInParser = async (options: OptionTypes) => {
 
   connect ? await connectFunction(page, url, connectOptions) : null;
 
+  sendMessages ? await sendMessages(page, url, sendMessagesOptions) : null;
+
   // await page.goto(url + search);
   // await page.setViewport({ width: 500, height: 1000 });
   // await page.addStyleTag({ content: "* {scroll-behavior: auto !important;}" });
