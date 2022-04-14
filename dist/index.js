@@ -5,6 +5,7 @@ require('dotenv').config({ path: '.env' });
 const startCloseBrowser_1 = require("./startCloseBrowser");
 const login_1 = require("./login");
 const connect_1 = require("./connect/connect");
+const sendMessagesFunction_1 = require("./sendMessages/sendMessagesFunction");
 const options_1 = require("./options");
 const linkedInParser = async (options) => {
     const { browserOptions, viewPortOptions, url, loginOptions, connect, connectOptions } = options;
@@ -13,7 +14,7 @@ const linkedInParser = async (options) => {
     await page.goto(url);
     await (0, login_1.default)(page, loginOptions);
     connect ? await (0, connect_1.default)(page, url, connectOptions) : null;
-    sendMessages ? await sendMessages(page, url, sendMessagesOptions) : null;
+    sendMessages ? await (0, sendMessagesFunction_1.default)(page, url, sendMessagesOptions) : null;
     // await page.goto(url + search);
     // await page.setViewport({ width: 500, height: 1000 });
     // await page.addStyleTag({ content: "* {scroll-behavior: auto !important;}" });
