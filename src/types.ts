@@ -12,6 +12,7 @@ interface OptionTypes {
     devtools: boolean | undefined
   },
   connect: boolean | undefined,
+  sendMessages: boolean | undefined,
 
   loginOptions: {
     email: string | undefined,
@@ -20,9 +21,10 @@ interface OptionTypes {
   
   connectOptions: {
     region: string | undefined,
-    people: string | undefined,
-    beforeKeword: string | undefined,
-    keywords: string | undefined,
+  },
+
+  sendMessagesOptions: {
+    region: string | undefined,
   }
 }
 
