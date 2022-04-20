@@ -1,12 +1,7 @@
 import OptionTypes from '../types'
 
-const sendMessagesFunction = async (page: OptionTypes["page"],
-url: OptionTypes["url"],
-sendMessagesOptions: OptionTypes["sendMessagesOptions"]): Promise<void> => {
+const sendMessagesFunction = async () => {
 
- console.log("We reached this thing");
- 
- 
 }
 
 
