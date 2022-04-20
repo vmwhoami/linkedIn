@@ -24,7 +24,6 @@ const linkedInParser = async (options: OptionTypes) => {
   await login(page, loginOptions);
 
   connect ? await connectFunction(page, url, connectOptions) : null;
- 
   // TODO: think about separating options into different files
   sendMessages ? await sendMessagesFunction(page, url, sendMessagesOptions) : null;
 
