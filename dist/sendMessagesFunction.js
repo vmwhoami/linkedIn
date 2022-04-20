@@ -1,5 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const sendMessagesFunction = async (page, url, connectOptions) => {
+const sendMessagesFunction = async () => {
 };
 exports.default = sendMessagesFunction;

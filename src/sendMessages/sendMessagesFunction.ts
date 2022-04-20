@@ -1,6 +1,9 @@
 import OptionTypes from '../types'
 
-const sendMessagesFunction = async () => {
+const sendMessagesFunction = async (page: OptionTypes["page"],
+url: OptionTypes["url"],
+connectOptions: OptionTypes["connectOptions"]): Promise<void> => {
+  
 
 }
 

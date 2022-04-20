@@ -5,7 +5,7 @@ import { startBrowser } from './startCloseBrowser';
 import login from './login';
 import connectFunction from './connect/connect';
 import options from './options';
-// import sendMessagesFunction './sendMessages/sendMessagesFunction'
+import sendMessagesFunction from './sendMessages/sendMessagesFunction';
 
 const linkedInParser = async (options: OptionTypes) => {
   const { browserOptions,
@@ -25,9 +25,8 @@ const linkedInParser = async (options: OptionTypes) => {
 
   connect ? await connectFunction(page, url, connectOptions) : null;
  
-  // TODO: Fix sendMessagesFunction
   // TODO: think about separating options into different files
-  // sendMessages ? await sendMessagesFunction(page, url, sendMessagesOptions) : null;
+  sendMessages ? await sendMessagesFunction(page, url, sendMessagesOptions) : null;
 
   // await page.goto(url + search);
   // await page.setViewport({ width: 500, height: 1000 });
