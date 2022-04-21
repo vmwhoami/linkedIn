@@ -1,8 +1,10 @@
 import OptionTypes from '../types'
+import sendMessagesUrlModifier from './sendMessagesUrlModifier'
 
 const sendMessagesFunction = async (page: OptionTypes["page"],
 url: OptionTypes["url"],
-connectOptions: OptionTypes["connectOptions"]): Promise<void> => {
+sendMessagesOptions: OptionTypes["sendMessagesOptions"]): Promise<void> => {
+  const modified: string = sendMessagesUrlModifier(url, sendMessagesOptions);
 
   await page.goto(modified);
   //This is the url to the page where you can send messages
