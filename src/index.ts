@@ -5,7 +5,7 @@ import { startBrowser } from './startCloseBrowser';
 import login from './login';
 import connectFunction from './connect/connect';
 import options from './options';
-import sendMessagesFunction from './sendMessages/sendMessagesFunction';
+import sendMessagesFunction from './sendMessages';
 
 const linkedInParser = async (options: OptionTypes) => {
   const { browserOptions,
