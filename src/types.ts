@@ -25,6 +25,7 @@ interface OptionTypes {
 
   sendMessagesOptions: {
     region: string | undefined,
+    cannedSearch: string | undefined,
   }
 }
 

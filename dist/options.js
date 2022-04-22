@@ -33,7 +33,9 @@ const options = {
         keywords: `${keywords['tech recruiter']}`,
         Headers: '%20&origin=GLOBAL_SEARCH_HEADER'
     },
-    sendMessagesOptions: {},
+    sendMessagesOptions: {
+        cannedSearch: 'search/results/people/?network=%5B"F"%5D&origin=MEMBER_PROFILE_CANNED_SEARCH&page=',
+    },
     messageOptions: {
         url: 'mynetwork/invite-connect/connections/',
     }

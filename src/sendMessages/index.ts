@@ -4,7 +4,7 @@ import sendMessagesUrlModifier from './UrlModifier'
 const sendMessages = async (page: OptionTypes["page"],
 url: OptionTypes["url"],
 sendMessagesOptions: OptionTypes["sendMessagesOptions"]): Promise<void> => {
-  const generateLink: string = sendMessagesUrlModifier(url, sendMessagesOptions);
+  const generateLink: string = sendMessagesUrlModifier(url, sendMessagesOptions, pageNumber);
 
   await page.goto(generateLink);
   //This is the url to the page where you can send messages

@@ -37,7 +37,7 @@ const options = {
   },
 
   sendMessagesOptions: {
-    
+    cannedSearch: 'search/results/people/?network=%5B"F"%5D&origin=MEMBER_PROFILE_CANNED_SEARCH&page=',
   },
 
   messageOptions: {
