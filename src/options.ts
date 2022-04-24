@@ -19,9 +19,9 @@ const keywords = {
 const options = {
   url: 'https://www.linkedin.com/',
   viewPortOptions: { width: 1200, height: 900 },
-  browserOptions: { headless: false, slowMo: 30, devtools: false },
-  connect: false,
-  sendMessages: true,
+  browserOptions: { headless: false, slowMo: 10, devtools: false },
+  connect: true,
+  sendMessages: false,
 
   loginOptions: {
     email: process.env.EMAIL,
@@ -30,9 +30,9 @@ const options = {
 
   connectOptions: {
     people: 'search/results/people/?geoUrn=%5B"',
-    region: locations['Atlanta'],
+    region: locations['Chicago'],
     beforeKeword: '%22%5D&keywords=',
-    keywords: `${keywords['tech recruiter']}`,
+    keywords: `${keywords['it recruiter']}`,
     Headers: '%20&origin=GLOBAL_SEARCH_HEADER'
   },
 
