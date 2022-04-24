@@ -6,6 +6,8 @@ url: OptionTypes["url"],
 sendMessagesOptions: OptionTypes["sendMessagesOptions"]): Promise<void> => {
   const generateLink: string = sendMessagesUrlModifier(url, sendMessagesOptions, 2);
 
+// TO DO: https://www.youtube.com/watch?v=edu_GJ6tI60 watch this
+
   await page.goto(generateLink); // Generated Link will change to switch between pages
   //This is the url to the page where you can send messages
 
