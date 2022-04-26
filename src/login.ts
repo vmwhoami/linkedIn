@@ -1,15 +1,16 @@
 import OptionTypes from './types'
 import { createCursor } from "ghost-cursor";
 
+
 const typeEmail = async (page: OptionTypes["page"], email: string, cursor: any) => {
   await page.waitForSelector('.input #session_key');
   await cursor.click('.input #session_key');
   await page.keyboard.type(email);
 }
 
-const typePassword = async (page: OptionTypes["page"], password: string, cursor: any) => {
+const typePassword = async (page: OptionTypes["page"], password: string) => {
   await page.waitForSelector('.input #session_password');
-  await cursor.click('.input #session_password');
+  await page.click('.input #session_password');
   await page.keyboard.type(password)
 }
 
@@ -24,7 +25,7 @@ const login = async (page:OptionTypes["page"], loginOptions:OptionTypes["loginOp
 
     const { email, password } = loginOptions;
     await typeEmail(page, email || '', cursor);
-    await typePassword(page,password || '',cursor);
+    await typePassword(page,password || '');
     await signIn(page,cursor);
   } catch (error) {
     console.log(error);

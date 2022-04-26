@@ -19,7 +19,7 @@ const keywords = {
 const options = {
   url: 'https://www.linkedin.com/',
   viewPortOptions: { width: 1200, height: 900 },
-  browserOptions: { headless: false, slowMo: 10, devtools: false },
+  browserOptions: { headless: false, slowMo: 20, devtools: false },
   connect: true,
   sendMessages: false,
 

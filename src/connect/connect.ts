@@ -7,7 +7,6 @@ const connect = async (page: OptionTypes["page"],
   connectOptions: OptionTypes["connectOptions"]): Promise<void> => {
   const modified: string = urlModifier(url, connectOptions);
  
-  
   await page.goto(modified);
   await makeConnectionsLoop(page);
 }

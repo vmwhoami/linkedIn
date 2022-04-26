@@ -6,9 +6,9 @@ const typeEmail = async (page, email, cursor) => {
     await cursor.click('.input #session_key');
     await page.keyboard.type(email);
 };
-const typePassword = async (page, password, cursor) => {
+const typePassword = async (page, password) => {
     await page.waitForSelector('.input #session_password');
-    await cursor.click('.input #session_password');
+    await page.click('.input #session_password');
     await page.keyboard.type(password);
 };
 const signIn = async (page, cursor) => {
@@ -20,7 +20,7 @@ const login = async (page, loginOptions) => {
         const cursor = (0, ghost_cursor_1.createCursor)(page);
         const { email, password } = loginOptions;
         await typeEmail(page, email || '', cursor);
-        await typePassword(page, password || '', cursor);
+        await typePassword(page, password || '');
         await signIn(page, cursor);
     }
     catch (error) {
