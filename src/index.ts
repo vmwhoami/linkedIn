@@ -22,6 +22,8 @@ const linkedInParser = async (options: OptionTypes) => {
   page.setViewport(viewPortOptions);
   await page.goto(url);
   await login(page, loginOptions);
+  await page.waitForTimeout(200);
+ 
 
   connect ? await connectFunction(page, url, connectOptions) : null;
   // TODO: think about separating options into different files

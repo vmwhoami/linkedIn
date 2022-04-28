@@ -13,6 +13,7 @@ const linkedInParser = async (options) => {
     page.setViewport(viewPortOptions);
     await page.goto(url);
     await (0, login_1.default)(page, loginOptions);
+    await page.waitForTimeout(200);
     connect ? await (0, connect_1.default)(page, url, connectOptions) : null;
     // TODO: think about separating options into different files
     sendMessages ? await (0, sendMessages_1.default)(page, url, sendMessagesOptions) : null;

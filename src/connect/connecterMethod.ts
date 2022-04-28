@@ -13,7 +13,7 @@ const connecterMethod = async (elements_arr: any, page: any) => {
     const checkObject = await page.waitForFunction(() => {
      let modalSmth = document.querySelector(".artdeco-modal__content")!
      if(modalSmth.querySelector("label")!= null){
-        return true
+       //send a method to change the connect button text
       }
 
     });

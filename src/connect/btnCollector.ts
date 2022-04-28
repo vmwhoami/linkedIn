@@ -1,3 +1,5 @@
+import { createCursor } from "ghost-cursor";
+
 const btnCollector = async (page: any) => {
   await page.waitForSelector('.entity-result__item .artdeco-button.artdeco-button--2.artdeco-button--secondary.ember-view');
   const children: any = [];
@@ -6,20 +8,57 @@ const btnCollector = async (page: any) => {
 
     return [...spans].filter(span => span.textContent!.replace(/\n/g, '').trim() === "Connect")
   });
-//   const checkObject = await page.waitForFunction(() =>{
-//     document.querySelector(".artdeco-modal__content")!.querySelector("label")!= null
-
-//  });
+ 
   const elements: any = await elementsHendles.getProperties();
 
   for (const property of elements.values()) {
     const element = property.asElement();
     element ? children.push(element) : null;
   }
- 
   
-  return children
+ await connecterMethod(children, page);
+  
 }
 
 
+// await page.waitForNavigation({ waitUntil: 'networkidle0' });
+// if (await page.$('#buttonToClick') !== null) {
+//     await page.click('#buttonToClick');
+//   } else {
+//     await page.waitForSelector('#otherButton');
+//     await page.click('#otherButton');
+//   }
+
+const connecterMethod = async (elements_arr: any, page: any) => {
+  const cursor = createCursor(page);
+
+ let nodeListToArray = Array.from(elements_arr) 
+  while (nodeListToArray.length > 0) {
+    const selectedElement = nodeListToArray.shift()
+
+    await selectedElement.click();
+    await page.waitForSelector('.artdeco-modal__actionbar.ember-view.text-align-right .ml1');
+
+    const checkObject = await page.waitForFunction(() => {
+     let modalSmth = document.querySelector(".artdeco-modal__content")!
+     if(modalSmth.querySelector("label")!= null){
+       //send a method to change the connect button text
+      }
+
+    });
+
+    if (checkObject) {
+      // think on changing the connect button it might be the case that it is reinserting the button into the array
+      // selectedElement.remove()
+
+      console.log("this is !!! ", checkObject);
+      
+      // console.log(elements_arr);
+      
+    } else {
+      await cursor.click('.artdeco-modal__actionbar.ember-view.text-align-right .ml1')
+    }
+
+  }
+}
 export default btnCollector;
