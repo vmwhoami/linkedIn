@@ -4,8 +4,10 @@ import goToNextPage from './goToNextPage';
 
 const makeConnectionsLoop = async (page: any) => {
   while (true) {
-    await btnCollector(page);
-    await goToNextPage(page);
+    let loopResult = await btnCollector(page);
+    
+    
+    return loopResult ? await goToNextPage(page, loopResult) : null;
   }
 }
 
