@@ -13,14 +13,15 @@ const btnCollector = async (page) => {
         const element = property.asElement();
         element ? children.push(element) : null;
     }
-    return await connecterMethod(children, page);
+    await connecterMethod(children, page);
 };
 const connecterMethod = async (elements_arr, page) => {
     const cursor = (0, ghost_cursor_1.createCursor)(page);
     while (elements_arr.length > 0) {
         const selectedElement = elements_arr.shift();
-        await selectedElement.click();
-        if (await page.$('.artdeco-button--disabled') !== null) {
+        await page.waitForTimeout(100);
+        await selectedElement.click({ clickCount: 2 });
+        if (await page.$('.artdeco-button.artdeco-button--2.artdeco-button--primary.artdeco-button--disabled.ember-view.ml1') !== null) {
             await page.waitForSelector('.artdeco-modal__dismiss.artdeco-button');
             await cursor.click('.artdeco-modal__dismiss.artdeco-button');
         }

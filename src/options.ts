@@ -20,8 +20,8 @@ const options = {
   url: 'https://www.linkedin.com/',
   viewPortOptions: { width: 1200, height: 900 },
   browserOptions: { headless: false, slowMo: 20, devtools: false },
-  connect: true,
-  sendMessages: false,
+  connect: false,
+  sendMessages: true,
 
   loginOptions: {
     email: process.env.EMAIL,
@@ -30,7 +30,7 @@ const options = {
 
   connectOptions: {
     people: 'search/results/people/?geoUrn=%5B"',
-    region: locations['Miami'],
+    region: locations['Philadelphia'],
     beforeKeword: '%22%5D&keywords=',
     keywords: `${keywords['it recruiter']}`,
     Headers: '%20&origin=GLOBAL_SEARCH_HEADER'

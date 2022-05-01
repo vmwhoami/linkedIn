@@ -8,15 +8,15 @@ const btnCollector = async (page: any) => {
 
     return [...spans].filter(span => span.textContent!.replace(/\n/g, '').trim() === "Connect")
   });
- 
+
   const elements: any = await elementsHendles.getProperties();
- 
+
   for (const property of elements.values()) {
-    const element = property.asElement();    
+    const element = property.asElement();
     element ? children.push(element) : null;
   }
-  
- return await connecterMethod(children, page);
+
+  await connecterMethod(children, page);
 }
 
 const connecterMethod = async (elements_arr: any, page: any) => {
@@ -24,16 +24,17 @@ const connecterMethod = async (elements_arr: any, page: any) => {
 
   while (elements_arr.length > 0) {
     const selectedElement = elements_arr.shift();
-    await selectedElement.click();
+    await page.waitForTimeout(100);
+    await selectedElement.click({ clickCount: 2 });
 
-    if(await page.$('.artdeco-button--disabled') !== null) {
+    if (await page.$('.artdeco-button.artdeco-button--2.artdeco-button--primary.artdeco-button--disabled.ember-view.ml1') !== null) {
       await page.waitForSelector('.artdeco-modal__dismiss.artdeco-button');
       await cursor.click('.artdeco-modal__dismiss.artdeco-button');
     } else {
       await page.waitForSelector('.artdeco-modal__actionbar.ember-view.text-align-right .ml1');
       await cursor.click('.artdeco-modal__actionbar.ember-view.text-align-right .ml1');
     }
-  //artdeco-button artdeco-button--2 artdeco-button--primary artdeco-button--disabled ember-view ml1
+    //artdeco-button artdeco-button--2 artdeco-button--primary artdeco-button--disabled ember-view ml1
     //check if there are no elements
 
     // elements_arr.length === 0 ? await page.evaluate(async() => {

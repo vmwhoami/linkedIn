@@ -9,6 +9,8 @@ sendMessagesOptions: OptionTypes["sendMessagesOptions"]): Promise<void> => {
 // TO DO: https://www.youtube.com/watch?v=edu_GJ6tI60 watch this
 
   await page.goto(generateLink); // Generated Link will change to switch between pages
+  // document.querySelectorAll('.entity-result__primary-subtitle')
+  // Array.from(subtitles)
   //This is the url to the page where you can send messages
 
   // search/results/people/?network=%5B"F"%5D&origin=MEMBER_PROFILE_CANNED_SEARCH&page=1
