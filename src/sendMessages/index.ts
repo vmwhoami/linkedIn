@@ -4,12 +4,17 @@ import sendMessagesUrlModifier from './UrlModifier'
 const sendMessages = async (page: OptionTypes["page"],
 url: OptionTypes["url"],
 sendMessagesOptions: OptionTypes["sendMessagesOptions"]): Promise<void> => {
-  const generateLink: string = sendMessagesUrlModifier(url, sendMessagesOptions, 2);
+  const generateLink: string = sendMessagesUrlModifier(url, sendMessagesOptions, 3);
 
 // TO DO: https://www.youtube.com/watch?v=edu_GJ6tI60 watch this
 
   await page.goto(generateLink); // Generated Link will change to switch between pages
-  // document.querySelectorAll('.entity-result__primary-subtitle')
+  const subtitles = await page.waitForFunction(() => {
+    let subtitles = document.querySelectorAll('.entity-result__primary-subtitle')
+    return [...subtitles].map(subtitle => subtitle.textContent!.replace(/\n/g, '').trim())
+
+   });
+  // let subtitles = document.querySelectorAll('.entity-result__primary-subtitle')
   // Array.from(subtitles)
   //This is the url to the page where you can send messages
 

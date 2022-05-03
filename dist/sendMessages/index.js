@@ -2,10 +2,14 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const UrlModifier_1 = require("./UrlModifier");
 const sendMessages = async (page, url, sendMessagesOptions) => {
-    const generateLink = (0, UrlModifier_1.default)(url, sendMessagesOptions, 2);
+    const generateLink = (0, UrlModifier_1.default)(url, sendMessagesOptions, 3);
     // TO DO: https://www.youtube.com/watch?v=edu_GJ6tI60 watch this
     await page.goto(generateLink); // Generated Link will change to switch between pages
-    // document.querySelectorAll('.entity-result__primary-subtitle')
+    const subtitles = await page.waitForFunction(() => {
+        let subtitles = document.querySelectorAll('.entity-result__primary-subtitle');
+        return [...subtitles].map(subtitle => subtitle.textContent.replace(/\n/g, '').trim());
+    });
+    // let subtitles = document.querySelectorAll('.entity-result__primary-subtitle')
     // Array.from(subtitles)
     //This is the url to the page where you can send messages
     // search/results/people/?network=%5B"F"%5D&origin=MEMBER_PROFILE_CANNED_SEARCH&page=1
