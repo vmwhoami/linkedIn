@@ -4,6 +4,8 @@ const ghost_cursor_1 = require("ghost-cursor");
 const btnCollector = async (page) => {
     await page.waitForSelector('.entity-result__item .artdeco-button.artdeco-button--2.artdeco-button--secondary.ember-view');
     const children = [];
+    //   page.evaluate will run the code once and return data.
+    // page.waitForFunction will run the code repeatedly until the code returns truthy values.
     const elementsHendles = await page.waitForFunction(async () => {
         const spans = await document.querySelectorAll('.entity-result__item .artdeco-button.artdeco-button--2.artdeco-button--secondary.ember-view:not(.artdeco-button--muted)');
         return [...spans].filter(span => span.textContent.replace(/\n/g, '').trim() === "Connect");
@@ -19,7 +21,7 @@ const connecterMethod = async (elements_arr, page) => {
     const cursor = (0, ghost_cursor_1.createCursor)(page);
     while (elements_arr.length > 0) {
         const selectedElement = elements_arr.shift();
-        await page.waitForTimeout(100);
+        await page.waitForTimeout(200);
         await selectedElement.click({ clickCount: 2 });
         if (await page.$('.artdeco-button.artdeco-button--2.artdeco-button--primary.artdeco-button--disabled.ember-view.ml1') !== null) {
             await page.waitForSelector('.artdeco-modal__dismiss.artdeco-button');

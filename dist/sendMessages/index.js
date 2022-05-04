@@ -5,9 +5,10 @@ const sendMessages = async (page, url, sendMessagesOptions) => {
     const generateLink = (0, UrlModifier_1.default)(url, sendMessagesOptions, 3);
     // TO DO: https://www.youtube.com/watch?v=edu_GJ6tI60 watch this
     await page.goto(generateLink); // Generated Link will change to switch between pages
-    const subtitles = await page.waitForFunction(() => {
+    const subtitles = await page.evaluate(() => {
         let subtitles = document.querySelectorAll('.entity-result__primary-subtitle');
-        return [...subtitles].map(subtitle => subtitle.textContent.replace(/\n/g, '').trim());
+        let results = [...subtitles].map(subtitle => subtitle.textContent.replace(/recruiter/i, '').trim());
+        console.log(results);
     });
     // let subtitles = document.querySelectorAll('.entity-result__primary-subtitle')
     // Array.from(subtitles)
