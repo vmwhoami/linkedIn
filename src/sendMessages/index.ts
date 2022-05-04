@@ -10,11 +10,13 @@ sendMessagesOptions: OptionTypes["sendMessagesOptions"]): Promise<void> => {
 
   await page.goto(generateLink); // Generated Link will change to switch between pages
   const subtitles = await page.evaluate(() => {
-    let subtitles = document.querySelectorAll('.entity-result__primary-subtitle')
-    
-     let results = [...subtitles].map(subtitle => subtitle.textContent!.replace(/recruiter/i, '').trim())
-
-     console.log(results);
+    let result__items = document.querySelectorAll('.entity-result__item')
+    let resultRecruiters  = result__items.filter(item => {
+      // result__items[0].childNodes[3].childNodes[1].childNodes[5].childNodes[4].childNodes[1].textContent
+      return  item.childNodes[3].childNodes[1].childNodes[5].childNodes[4].childNodes[1].textContent
+    })
+  
+     console.log(resultRecruiters);
      
    });
  
