@@ -5,6 +5,7 @@ const sendMessages = async (page, url, sendMessagesOptions) => {
     const generateLink = (0, UrlModifier_1.default)(url, sendMessagesOptions, 3);
     // TO DO: https://www.youtube.com/watch?v=edu_GJ6tI60 watch this
     await page.goto(generateLink); // Generated Link will change to switch between pages
+    // https://www.codegrepper.com/code-examples/javascript/can+we+filter+children+according+to+class+in+javascript read through this
     const subtitles = await page.evaluate(() => {
         let result__items = document.querySelectorAll('.entity-result__item');
         let resultRecruiters = result__items.filter(item => {
