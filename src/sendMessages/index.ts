@@ -12,12 +12,12 @@ sendMessagesOptions: OptionTypes["sendMessagesOptions"]): Promise<void> => {
   // https://www.codegrepper.com/code-examples/javascript/can+we+filter+children+according+to+class+in+javascript read through this
   const subtitles = await page.evaluate(() => {
     let result__items = document.querySelectorAll('.entity-result__item')
-    let resultRecruiters  = result__items.filter(item => {
-      // result__items[0].childNodes[3].childNodes[1].childNodes[5].childNodes[4].childNodes[1].textContent
-      return  item.childNodes[3].childNodes[1].childNodes[5].childNodes[4].childNodes[1].textContent
-    })
+    let items = Array(result__items)
+    let resultRecruiters  = items.forEach(element => {
+      element
+    }) 
   
-     console.log(resultRecruiters);
+     console.log(result__items);
      
    });
  
