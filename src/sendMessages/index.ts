@@ -6,15 +6,29 @@ url: OptionTypes["url"],
 sendMessagesOptions: OptionTypes["sendMessagesOptions"]): Promise<void> => {
   const generateLink: string = sendMessagesUrlModifier(url, sendMessagesOptions, 3);
 
-// TO DO: https://www.youtube.com/watch?v=edu_GJ6tI60 watch this
-
   await page.goto(generateLink); // Generated Link will change to switch between pages
   // https://www.codegrepper.com/code-examples/javascript/can+we+filter+children+according+to+class+in+javascript read through this
   const subtitles = await page.evaluate(() => {
     let result__items = document.querySelectorAll('.entity-result__item')
-    let resultRecruiters  = result__items.forEach(element => {
-      console.log(element.querySelector('.entity-result__primary-subtitle')?.textContent);
+     
+   let resultRecruiters:any = []
+    result__items.forEach(element => {
+//   const str = 'hello world!';
+// const result = /^hello/.test(str);
+
+// console.log(result); // true
+      // ^(?=.*it recruiter)
+      // ^(?=.*technical recruiter)
+      // ^(?=.*tech recruiter)
+      // ^(?=.*engi recruiter)
+
+      let str:any = element.querySelector('.entity-result__primary-subtitle')?.textContent?.replace(/\n/g, '').trim().toLowerCase();
+
+      let result = /^(?=.*it recruiter)/.test(str);
+      result ? resultRecruiters.push(element): null;
+      
     }) 
+     console.log(resultRecruiters);
   
    });
  
