@@ -4,23 +4,14 @@ const UrlModifier_1 = require("./UrlModifier");
 const sendMessages = async (page, url, sendMessagesOptions) => {
     const generateLink = (0, UrlModifier_1.default)(url, sendMessagesOptions, 3);
     await page.goto(generateLink); // Generated Link will change to switch between pages
-    // https://www.codegrepper.com/code-examples/javascript/can+we+filter+children+according+to+class+in+javascript read through this
     const subtitles = await page.evaluate(() => {
         let result__items = document.querySelectorAll('.entity-result__item');
         let resultRecruiters = [];
         result__items.forEach(element => {
-            //   const str = 'hello world!';
-            // const result = /^hello/.test(str);
-            // console.log(result); // true
-            // ^(?=.*it recruiter)
-            // ^(?=.*technical recruiter)
-            // ^(?=.*tech recruiter)
-            // ^(?=.*engi recruiter)
             let str = element.querySelector('.entity-result__primary-subtitle')?.textContent?.replace(/\n/g, '').trim().toLowerCase();
             let result = /^(?=.*it recruiter)/.test(str);
             result ? resultRecruiters.push(element) : null;
         });
-        console.log(resultRecruiters);
     });
     // let subtitles = document.querySelectorAll('.entity-result__primary-subtitle')
     // Array.from(subtitles)

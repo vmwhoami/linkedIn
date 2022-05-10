@@ -2,36 +2,26 @@ import OptionTypes from '../types'
 import sendMessagesUrlModifier from './UrlModifier'
 
 const sendMessages = async (page: OptionTypes["page"],
-url: OptionTypes["url"],
-sendMessagesOptions: OptionTypes["sendMessagesOptions"]): Promise<void> => {
+  url: OptionTypes["url"],
+  sendMessagesOptions: OptionTypes["sendMessagesOptions"]): Promise<void> => {
   const generateLink: string = sendMessagesUrlModifier(url, sendMessagesOptions, 3);
 
   await page.goto(generateLink); // Generated Link will change to switch between pages
-  // https://www.codegrepper.com/code-examples/javascript/can+we+filter+children+according+to+class+in+javascript read through this
   const subtitles = await page.evaluate(() => {
     let result__items = document.querySelectorAll('.entity-result__item')
-     
-   let resultRecruiters:any = []
+
+    let resultRecruiters: any = []
     result__items.forEach(element => {
-//   const str = 'hello world!';
-// const result = /^hello/.test(str);
-
-// console.log(result); // true
-      // ^(?=.*it recruiter)
-      // ^(?=.*technical recruiter)
-      // ^(?=.*tech recruiter)
-      // ^(?=.*engi recruiter)
-
-      let str:any = element.querySelector('.entity-result__primary-subtitle')?.textContent?.replace(/\n/g, '').trim().toLowerCase();
+      let str: any = element.querySelector('.entity-result__primary-subtitle')?.textContent?.replace(/\n/g, '').trim().toLowerCase();
 
       let result = /^(?=.*it recruiter)/.test(str);
-      result ? resultRecruiters.push(element): null;
-      
-    }) 
-     console.log(resultRecruiters);
-  
-   });
- 
+      result ? resultRecruiters.push(element) : null;
+    })
+
+   
+
+  });
+
   // let subtitles = document.querySelectorAll('.entity-result__primary-subtitle')
   // Array.from(subtitles)
   //This is the url to the page where you can send messages

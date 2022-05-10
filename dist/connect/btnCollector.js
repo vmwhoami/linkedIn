@@ -4,7 +4,7 @@ const ghost_cursor_1 = require("ghost-cursor");
 const btnCollector = async (page) => {
     await page.waitForSelector('.entity-result__item .artdeco-button.artdeco-button--2.artdeco-button--secondary.ember-view');
     const children = [];
-    //   page.evaluate will run the code once and return data.
+    // page.evaluate will run the code once and return data.
     // page.waitForFunction will run the code repeatedly until the code returns truthy values.
     const elementsHendles = await page.waitForFunction(async () => {
         const spans = await document.querySelectorAll('.entity-result__item .artdeco-button.artdeco-button--2.artdeco-button--secondary.ember-view:not(.artdeco-button--muted)');
