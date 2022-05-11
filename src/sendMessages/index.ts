@@ -7,24 +7,35 @@ const sendMessages = async (page: OptionTypes["page"],
   const generateLink: string = sendMessagesUrlModifier(url, sendMessagesOptions, 3);
 
   await page.goto(generateLink); // Generated Link will change to switch between pages
-  let resultRecruiters: any = []
-  const subtitles = await page.evaluate(() => {
-    let result__items = document.querySelectorAll('.entity-result__item')
 
-    result__items.forEach(element => {
-      let str: any = element.querySelector('.entity-result__primary-subtitle')?.textContent?.replace(/\n/g, '').trim().toLowerCase();
+  const subtitles = await page.evaluate(async () => {
+    let resultRecruiters: any = [];
+    let result__items = await document.querySelectorAll('.entity-result__item')
 
-      let result = /^(?=.*it recruiter)|^(?=.*technical recruiter)/.test(str);
-
+    result__items.forEach(async element => {
+      const str: any = element
+        .querySelector('.entity-result__primary-subtitle')?.textContent?.replace(/\n/g, '')
+        .trim().toLowerCase();
+      const result = /^(?=.*it recruiter)|^(?=.*technical recruiter)/.test(str);
       result ? resultRecruiters.push(element) : null;
-      return resultRecruiters;
     })
+    // Look in what you need I'm guessing it's the message button
+    console.log(resultRecruiters);
     
-    // const elements: any = await resultRecruiters.getProperties();
-
-   
-
+    // const buttons = await resultRecruiters.querySelectorAll('.artdeco-button.artdeco-button--2 artdeco-button--secondary.ember-view')
+    // console.log(buttons);
+    
+    // return [...buttons]
   });
+
+  // for (let styleNumber of subtitles) {
+  //   try {
+  //     console.log(await (await styleNumber.getProperty('innerText')).jsonValue());
+  //   }
+  //   catch (e) {
+  //     console.log(`Could not get the style number:`, e.message);
+  //   }
+  // }
 
   // let subtitles = document.querySelectorAll('.entity-result__primary-subtitle')
   // Array.from(subtitles)
