@@ -4,14 +4,16 @@ const UrlModifier_1 = require("./UrlModifier");
 const sendMessages = async (page, url, sendMessagesOptions) => {
     const generateLink = (0, UrlModifier_1.default)(url, sendMessagesOptions, 3);
     await page.goto(generateLink); // Generated Link will change to switch between pages
+    let resultRecruiters = [];
     const subtitles = await page.evaluate(() => {
         let result__items = document.querySelectorAll('.entity-result__item');
-        let resultRecruiters = [];
         result__items.forEach(element => {
             let str = element.querySelector('.entity-result__primary-subtitle')?.textContent?.replace(/\n/g, '').trim().toLowerCase();
-            let result = /^(?=.*it recruiter)/.test(str);
+            let result = /^(?=.*it recruiter)|^(?=.*technical recruiter)/.test(str);
             result ? resultRecruiters.push(element) : null;
+            return resultRecruiters;
         });
+        // const elements: any = await resultRecruiters.getProperties();
     });
     // let subtitles = document.querySelectorAll('.entity-result__primary-subtitle')
     // Array.from(subtitles)

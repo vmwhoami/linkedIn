@@ -7,16 +7,20 @@ const sendMessages = async (page: OptionTypes["page"],
   const generateLink: string = sendMessagesUrlModifier(url, sendMessagesOptions, 3);
 
   await page.goto(generateLink); // Generated Link will change to switch between pages
+  let resultRecruiters: any = []
   const subtitles = await page.evaluate(() => {
     let result__items = document.querySelectorAll('.entity-result__item')
 
-    let resultRecruiters: any = []
     result__items.forEach(element => {
       let str: any = element.querySelector('.entity-result__primary-subtitle')?.textContent?.replace(/\n/g, '').trim().toLowerCase();
 
-      let result = /^(?=.*it recruiter)/.test(str);
+      let result = /^(?=.*it recruiter)|^(?=.*technical recruiter)/.test(str);
+
       result ? resultRecruiters.push(element) : null;
+      return resultRecruiters;
     })
+    
+    // const elements: any = await resultRecruiters.getProperties();
 
    
 
