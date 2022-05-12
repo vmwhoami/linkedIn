@@ -19,13 +19,10 @@ const sendMessages = async (page: OptionTypes["page"],
       const result = /^(?=.*it recruiter)|^(?=.*technical recruiter)/.test(str);
       result ? resultRecruiters.push(element) : null;
     })
-    // Look in what you need I'm guessing it's the message button
-    console.log(resultRecruiters);
-    
-    // const buttons = await resultRecruiters.querySelectorAll('.artdeco-button.artdeco-button--2 artdeco-button--secondary.ember-view')
-    // console.log(buttons);
-    
-    // return [...buttons]
+
+    const buttons = await resultRecruiters.map(el => el.querySelector('.artdeco-button.artdeco-button--2.artdeco-button--secondary.ember-view'))
+
+    return [...buttons]
   });
 
   // for (let styleNumber of subtitles) {
