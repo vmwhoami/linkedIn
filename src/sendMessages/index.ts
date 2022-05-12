@@ -8,7 +8,7 @@ const sendMessages = async (page: OptionTypes["page"],
 
   await page.goto(generateLink); // Generated Link will change to switch between pages
 
-  const subtitles = await page.evaluate(async () => {
+  const subtitles = await page.evaluateHandle(async () => {
     let resultRecruiters: any = [];
     let result__items = await document.querySelectorAll('.entity-result__item')
 
@@ -24,31 +24,16 @@ const sendMessages = async (page: OptionTypes["page"],
 
     return [...buttons]
   });
+  const children: any = [];
+  const elements: any = await subtitles.getProperties()
 
-  // for (let styleNumber of subtitles) {
-  //   try {
-  //     console.log(await (await styleNumber.getProperty('innerText')).jsonValue());
-  //   }
-  //   catch (e) {
-  //     console.log(`Could not get the style number:`, e.message);
-  //   }
-  // }
+  for (const property of elements.values()) {
+    const element = property.asElement();
+    element ? children.push(element) : null;
+  }
+ 
 
-  // let subtitles = document.querySelectorAll('.entity-result__primary-subtitle')
-  // Array.from(subtitles)
-  //This is the url to the page where you can send messages
-
-  // search/results/people/?network=%5B"F"%5D&origin=MEMBER_PROFILE_CANNED_SEARCH&page=1
-
-  // .entity-result__primary-subtitle this selects job title
-  // .entity-result__secondary-subtitle text that contains location
-
-  // .msg-form__msg-content-container message input container 
-  // .msg-form__footer-action artdeco-button artdeco-button--tertiary artdeco-button--circle artdeco-button--muted  // attach image or attach file button 
-
-  //  title="Attach a file to your conversation with " aria-label="Attach a file to your conversation with " see if you can differentiate between the two buttons by using the aria-label or title attribute
-
-  // msg-overlay-bubble-header__control artdeco-button artdeco-button--circle artdeco-button--muted artdeco-button--1 artdeco-button--tertiary ember-view  Close button selector to close the message window
+ 
 }
 
 
