@@ -1,7 +1,8 @@
 import OptionTypes from '../types'
 import sendMessagesUrlModifier from './UrlModifier'
+import { createCursor } from "ghost-cursor";
 
-const sendMessages = async (page: OptionTypes["page"],
+const collectMessageBtn = async (page: OptionTypes["page"],
   url: OptionTypes["url"],
   sendMessagesOptions: OptionTypes["sendMessagesOptions"]): Promise<void> => {
   const generateLink: string = sendMessagesUrlModifier(url, sendMessagesOptions, 3);
@@ -31,11 +32,21 @@ const sendMessages = async (page: OptionTypes["page"],
     const element = property.asElement();
     element ? children.push(element) : null;
   }
- 
-
+  await sendMessages(children, page);
  
 }
 
 
+const sendMessages = async (elements_arr: any, page: any) => {
+  const cursor = createCursor(page);
 
-export default sendMessages;
+  while (elements_arr.length > 0) {
+    const selectedElement = elements_arr.shift();
+    await page.waitForTimeout(200);
+    await selectedElement.click({ clickCount: 2 });
+
+  }
+}
+
+
+export default collectMessageBtn;

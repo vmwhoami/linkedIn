@@ -1,7 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const UrlModifier_1 = require("./UrlModifier");
-const sendMessages = async (page, url, sendMessagesOptions) => {
+const ghost_cursor_1 = require("ghost-cursor");
+const collectMessageBtn = async (page, url, sendMessagesOptions) => {
     const generateLink = (0, UrlModifier_1.default)(url, sendMessagesOptions, 3);
     await page.goto(generateLink); // Generated Link will change to switch between pages
     const subtitles = await page.evaluateHandle(async () => {
@@ -23,5 +24,14 @@ const sendMessages = async (page, url, sendMessagesOptions) => {
         const element = property.asElement();
         element ? children.push(element) : null;
     }
+    await sendMessages(children, page);
 };
-exports.default = sendMessages;
+const sendMessages = async (elements_arr, page) => {
+    const cursor = (0, ghost_cursor_1.createCursor)(page);
+    while (elements_arr.length > 0) {
+        const selectedElement = elements_arr.shift();
+        await page.waitForTimeout(200);
+        await selectedElement.click({ clickCount: 2 });
+    }
+};
+exports.default = collectMessageBtn;
