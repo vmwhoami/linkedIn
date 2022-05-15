@@ -42,14 +42,31 @@ const sendMessages = async (elements_arr: any, page: any) => {
   // Learn this
 // https://www.google.com/search?q=js+while+loop+with+delay+await&oq=js+while+loop+with+delay+awa&aqs=chrome.1.69i57j33i160l2j33i21.7783j0j7&sourceid=chrome&ie=UTF-8
 //https://www.geeksforgeeks.org/how-to-delay-a-loop-in-javascript-using-async-await-with-promise/
-  while (elements_arr.length > 0) {
-    const selectedElement = elements_arr.shift();
-    // await page.waitForTimeout(200);
-    await selectedElement.click();
-    // msg-form__contenteditable t-14 t-black--light t-normal flex-grow-1 full-height notranslate
+asyncForEach(elements_arr, async (element: any, index: number, array: any) => {
+  await cursor.click(element);
+  await page.waitForSelector('.msg-form__contenteditable.t-14.t-black--light.t-normal.flex-grow-1.full-height.notranslate');
+  await cursor.click('.msg-form__contenteditable.t-14.t-black--light.t-normal.flex-grow-1.full-height.notranslate');
+  await page.keyboard.type("Hello World");
+  await page.keyboard.press('Enter');
+ 
+  await page.waitForSelector('.msg-overlay-bubble-header__control.artdeco-button.artdeco-button--circle.artdeco-button--muted.artdeco-button--1.artdeco-button--tertiary.ember-view')
+  await cursor.click('.msg-overlay-bubble-header__control.artdeco-button.artdeco-button--circle.artdeco-button--muted.artdeco-button--1.artdeco-button--tertiary.ember-view')
+})
+  // while (elements_arr.length > 0) {
+  //   const selectedElement = elements_arr.shift();
+  //   // await page.waitForTimeout(200);
+  //   // the whole process of clicking the button typing the text and sending the message should be in a promise
+  //   await selectedElement.click();
+  //   // .msg-form__contenteditable.t-14.t-black--light.t-normal.flex-grow-1.full-height.notranslate
       
-  }
+  // }
 }
 
+
+const asyncForEach = async (array: any, callback: any) => {
+  for (let index = 0; index < array.length; index++) {
+    await callback(array[index], index, array);
+  }
+}
 
 export default collectMessageBtn;
