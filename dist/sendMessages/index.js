@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const UrlModifier_1 = require("./UrlModifier");
 const ghost_cursor_1 = require("ghost-cursor");
 const collectMessageBtn = async (page, url, sendMessagesOptions) => {
-    const generateLink = (0, UrlModifier_1.default)(url, sendMessagesOptions, 3);
+    const generateLink = (0, UrlModifier_1.default)(url, sendMessagesOptions, 4);
     await page.goto(generateLink); // Generated Link will change to switch between pages update this to dynamic
     const subtitles = await page.evaluateHandle(async () => {
         let resultRecruiters = [];
@@ -35,7 +35,7 @@ const sendMessages = async (elements_arr, page) => {
         await cursor.click(element);
         await page.waitForSelector('.msg-form__contenteditable.t-14.t-black--light.t-normal.flex-grow-1.full-height.notranslate');
         await cursor.click('.msg-form__contenteditable.t-14.t-black--light.t-normal.flex-grow-1.full-height.notranslate');
-        await page.keyboard.type("Hello World");
+        await page.keyboard.type("Hi there, I am interested in your job posting.");
         await page.keyboard.press('Enter');
         await page.waitForSelector('.msg-overlay-bubble-header__control.artdeco-button.artdeco-button--circle.artdeco-button--muted.artdeco-button--1.artdeco-button--tertiary.ember-view');
         await cursor.click('.msg-overlay-bubble-header__control.artdeco-button.artdeco-button--circle.artdeco-button--muted.artdeco-button--1.artdeco-button--tertiary.ember-view');

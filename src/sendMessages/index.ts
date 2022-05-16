@@ -5,7 +5,7 @@ import { createCursor } from "ghost-cursor";
 const collectMessageBtn = async (page: OptionTypes["page"],
   url: OptionTypes["url"],
   sendMessagesOptions: OptionTypes["sendMessagesOptions"]): Promise<void> => {
-  const generateLink: string = sendMessagesUrlModifier(url, sendMessagesOptions, 3);
+  const generateLink: string = sendMessagesUrlModifier(url, sendMessagesOptions, 4);
 
   await page.goto(generateLink); // Generated Link will change to switch between pages update this to dynamic
 
@@ -46,7 +46,7 @@ asyncForEach(elements_arr, async (element: any, index: number, array: any) => {
   await cursor.click(element);
   await page.waitForSelector('.msg-form__contenteditable.t-14.t-black--light.t-normal.flex-grow-1.full-height.notranslate');
   await cursor.click('.msg-form__contenteditable.t-14.t-black--light.t-normal.flex-grow-1.full-height.notranslate');
-  await page.keyboard.type("Hello World");
+  await page.keyboard.type("Hi there, I am interested in your job posting.");
   await page.keyboard.press('Enter');
  
   await page.waitForSelector('.msg-overlay-bubble-header__control.artdeco-button.artdeco-button--circle.artdeco-button--muted.artdeco-button--1.artdeco-button--tertiary.ember-view')
