@@ -5,7 +5,7 @@ import { createCursor } from "ghost-cursor";
 const collectMessageBtn = async (page: OptionTypes["page"],
   url: OptionTypes["url"],
   sendMessagesOptions: OptionTypes["sendMessagesOptions"]): Promise<void> => {
-  const generateLink: string = sendMessagesUrlModifier(url, sendMessagesOptions, 4);
+  const generateLink: string = sendMessagesUrlModifier(url, sendMessagesOptions, 5);
 
   await page.goto(generateLink); // Generated Link will change to switch between pages update this to dynamic
 
@@ -23,6 +23,8 @@ const collectMessageBtn = async (page: OptionTypes["page"],
 
     const buttons = await resultRecruiters.map(el => el.querySelector('.artdeco-button.artdeco-button--2.artdeco-button--secondary.ember-view'))
 
+    console.log(buttons);
+    
     return [...buttons]
   });
   const children: any = [];
@@ -32,34 +34,41 @@ const collectMessageBtn = async (page: OptionTypes["page"],
     const element = property.asElement();
     element ? children.push(element) : null;
   }
+
+
   await sendMessages(children, page);
  
 }
-
+// Promise.all
 
 const sendMessages = async (elements_arr: any, page: any) => {
   const cursor = createCursor(page);
   // Learn this
-// https://www.google.com/search?q=js+while+loop+with+delay+await&oq=js+while+loop+with+delay+awa&aqs=chrome.1.69i57j33i160l2j33i21.7783j0j7&sourceid=chrome&ie=UTF-8
-//https://www.geeksforgeeks.org/how-to-delay-a-loop-in-javascript-using-async-await-with-promise/
-asyncForEach(elements_arr, async (element: any, index: number, array: any) => {
-  await cursor.click(element);
-  await page.waitForSelector('.msg-form__contenteditable.t-14.t-black--light.t-normal.flex-grow-1.full-height.notranslate');
-  await cursor.click('.msg-form__contenteditable.t-14.t-black--light.t-normal.flex-grow-1.full-height.notranslate');
-  await page.keyboard.type("Hi there, I am interested in your job posting.");
-  await page.keyboard.press('Enter');
+
+  //https://www.freecodecamp.org/news/promise-all-in-javascript-with-example-6c8c5aea3e32/
+ // https://stackoverflow.com/questions/64499035/puppeteer-second-promise-all-times-out-after-trying-to-click-td-with-class-click
  
-  await page.waitForSelector('.msg-overlay-bubble-header__control.artdeco-button.artdeco-button--circle.artdeco-button--muted.artdeco-button--1.artdeco-button--tertiary.ember-view')
-  await cursor.click('.msg-overlay-bubble-header__control.artdeco-button.artdeco-button--circle.artdeco-button--muted.artdeco-button--1.artdeco-button--tertiary.ember-view')
-})
-  // while (elements_arr.length > 0) {
-  //   const selectedElement = elements_arr.shift();
-  //   // await page.waitForTimeout(200);
-  //   // the whole process of clicking the button typing the text and sending the message should be in a promise
-  //   await selectedElement.click();
-  //   // .msg-form__contenteditable.t-14.t-black--light.t-normal.flex-grow-1.full-height.notranslate
-      
-  // }
+// asyncForEach(elements_arr, async (element: any, index: number, array: any) => {
+//   await cursor.click(element);
+//   await page.waitForSelector('.msg-form__contenteditable.t-14.t-black--light.t-normal.flex-grow-1.full-height.notranslate');
+//   await cursor.click('.msg-form__contenteditable.t-14.t-black--light.t-normal.flex-grow-1.full-height.notranslate');
+//   await page.keyboard.type("Hi there, I am interested in your job posting.");
+//   await page.keyboard.press('Enter');
+ 
+//   await page.waitForSelector('.msg-overlay-bubble-header__control.artdeco-button.artdeco-button--circle.artdeco-button--muted.artdeco-button--1.artdeco-button--tertiary.ember-view')
+//   await cursor.click('.msg-overlay-bubble-header__control.artdeco-button.artdeco-button--circle.artdeco-button--muted.artdeco-button--1.artdeco-button--tertiary.ember-view')
+// })
+ 
+  while (elements_arr.length > 0) {
+    const selectedElement = elements_arr.shift();
+    await selectedElement.click();
+    await page.waitForSelector('.msg-form__contenteditable.t-14.t-black--light.t-normal.flex-grow-1.full-height.notranslate');
+    await cursor.click('.msg-form__contenteditable.t-14.t-black--light.t-normal.flex-grow-1.full-height.notranslate');
+    await page.keyboard.type("Hi");
+    await cursor.click('.msg-form__send-button.artdeco-button.artdeco-button--1')
+    await page.waitForSelector('.msg-overlay-bubble-header__control.artdeco-button.artdeco-button--circle.artdeco-button--muted.artdeco-button--1.artdeco-button--tertiary.ember-view')
+    await cursor.click('.msg-overlay-bubble-header__control.artdeco-button.artdeco-button--circle.artdeco-button--muted.artdeco-button--1.artdeco-button--tertiary.ember-view')
+  }
 }
 
 

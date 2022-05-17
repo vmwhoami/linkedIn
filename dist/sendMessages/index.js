@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const UrlModifier_1 = require("./UrlModifier");
 const ghost_cursor_1 = require("ghost-cursor");
 const collectMessageBtn = async (page, url, sendMessagesOptions) => {
-    const generateLink = (0, UrlModifier_1.default)(url, sendMessagesOptions, 4);
+    const generateLink = (0, UrlModifier_1.default)(url, sendMessagesOptions, 5);
     await page.goto(generateLink); // Generated Link will change to switch between pages update this to dynamic
     const subtitles = await page.evaluateHandle(async () => {
         let resultRecruiters = [];
@@ -16,6 +16,7 @@ const collectMessageBtn = async (page, url, sendMessagesOptions) => {
             result ? resultRecruiters.push(element) : null;
         });
         const buttons = await resultRecruiters.map(el => el.querySelector('.artdeco-button.artdeco-button--2.artdeco-button--secondary.ember-view'));
+        console.log(buttons);
         return [...buttons];
     });
     const children = [];
@@ -26,27 +27,31 @@ const collectMessageBtn = async (page, url, sendMessagesOptions) => {
     }
     await sendMessages(children, page);
 };
+// Promise.all
 const sendMessages = async (elements_arr, page) => {
     const cursor = (0, ghost_cursor_1.createCursor)(page);
     // Learn this
-    // https://www.google.com/search?q=js+while+loop+with+delay+await&oq=js+while+loop+with+delay+awa&aqs=chrome.1.69i57j33i160l2j33i21.7783j0j7&sourceid=chrome&ie=UTF-8
-    //https://www.geeksforgeeks.org/how-to-delay-a-loop-in-javascript-using-async-await-with-promise/
-    asyncForEach(elements_arr, async (element, index, array) => {
-        await cursor.click(element);
+    //https://www.freecodecamp.org/news/promise-all-in-javascript-with-example-6c8c5aea3e32/
+    // https://stackoverflow.com/questions/64499035/puppeteer-second-promise-all-times-out-after-trying-to-click-td-with-class-click
+    // asyncForEach(elements_arr, async (element: any, index: number, array: any) => {
+    //   await cursor.click(element);
+    //   await page.waitForSelector('.msg-form__contenteditable.t-14.t-black--light.t-normal.flex-grow-1.full-height.notranslate');
+    //   await cursor.click('.msg-form__contenteditable.t-14.t-black--light.t-normal.flex-grow-1.full-height.notranslate');
+    //   await page.keyboard.type("Hi there, I am interested in your job posting.");
+    //   await page.keyboard.press('Enter');
+    //   await page.waitForSelector('.msg-overlay-bubble-header__control.artdeco-button.artdeco-button--circle.artdeco-button--muted.artdeco-button--1.artdeco-button--tertiary.ember-view')
+    //   await cursor.click('.msg-overlay-bubble-header__control.artdeco-button.artdeco-button--circle.artdeco-button--muted.artdeco-button--1.artdeco-button--tertiary.ember-view')
+    // })
+    while (elements_arr.length > 0) {
+        const selectedElement = elements_arr.shift();
+        await selectedElement.click();
         await page.waitForSelector('.msg-form__contenteditable.t-14.t-black--light.t-normal.flex-grow-1.full-height.notranslate');
         await cursor.click('.msg-form__contenteditable.t-14.t-black--light.t-normal.flex-grow-1.full-height.notranslate');
-        await page.keyboard.type("Hi there, I am interested in your job posting.");
-        await page.keyboard.press('Enter');
+        await page.keyboard.type("Hi");
+        await cursor.click('.msg-form__send-button.artdeco-button.artdeco-button--1');
         await page.waitForSelector('.msg-overlay-bubble-header__control.artdeco-button.artdeco-button--circle.artdeco-button--muted.artdeco-button--1.artdeco-button--tertiary.ember-view');
         await cursor.click('.msg-overlay-bubble-header__control.artdeco-button.artdeco-button--circle.artdeco-button--muted.artdeco-button--1.artdeco-button--tertiary.ember-view');
-    });
-    // while (elements_arr.length > 0) {
-    //   const selectedElement = elements_arr.shift();
-    //   // await page.waitForTimeout(200);
-    //   // the whole process of clicking the button typing the text and sending the message should be in a promise
-    //   await selectedElement.click();
-    //   // .msg-form__contenteditable.t-14.t-black--light.t-normal.flex-grow-1.full-height.notranslate
-    // }
+    }
 };
 const asyncForEach = async (array, callback) => {
     for (let index = 0; index < array.length; index++) {
