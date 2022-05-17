@@ -58,7 +58,11 @@ const sendMessages = async (elements_arr: any, page: any) => {
 //   await page.waitForSelector('.msg-overlay-bubble-header__control.artdeco-button.artdeco-button--circle.artdeco-button--muted.artdeco-button--1.artdeco-button--tertiary.ember-view')
 //   await cursor.click('.msg-overlay-bubble-header__control.artdeco-button.artdeco-button--circle.artdeco-button--muted.artdeco-button--1.artdeco-button--tertiary.ember-view')
 // })
- 
+await Promise.all([
+  selectedElement.click(),
+  page.waitForNavigation(),
+]).catch(e => console.log(e));
+
   while (elements_arr.length > 0) {
     const selectedElement = elements_arr.shift();
     await selectedElement.click();
