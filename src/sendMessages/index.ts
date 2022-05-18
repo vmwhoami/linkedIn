@@ -41,14 +41,14 @@ const collectMessageBtn = async (page: OptionTypes["page"],
 }
 // Promise.all
 
-const sendMessages = async (elements_arr: any, page: any) => {
+const sendMessages = async (children: any, page: any) => {
   const cursor = createCursor(page);
   // Learn this
 
   //https://www.freecodecamp.org/news/promise-all-in-javascript-with-example-6c8c5aea3e32/
   // https://stackoverflow.com/questions/64499035/puppeteer-second-promise-all-times-out-after-trying-to-click-td-with-class-click
 
-  // asyncForEach(elements_arr, async (element: any, index: number, array: any) => {
+  // asyncForEach(children, async (element: any, index: number, array: any) => {
   //   await cursor.click(element);
   //   await page.waitForSelector('.msg-form__contenteditable.t-14.t-black--light.t-normal.flex-grow-1.full-height.notranslate');
   //   await cursor.click('.msg-form__contenteditable.t-14.t-black--light.t-normal.flex-grow-1.full-height.notranslate');
@@ -59,8 +59,8 @@ const sendMessages = async (elements_arr: any, page: any) => {
   //   await cursor.click('.msg-overlay-bubble-header__control.artdeco-button.artdeco-button--circle.artdeco-button--muted.artdeco-button--1.artdeco-button--tertiary.ember-view')
   // })
 
-  while (elements_arr.length > 0) {
-    const selectedElement = elements_arr.shift();
+  while (children.length > 0) {
+    const selectedElement = children.shift();
     // await selectedElement.click();
 
     await Promise.all([
@@ -80,13 +80,14 @@ async function writeMessage(selectedElement: any, page: any, cursor: any) {
   await cursor.click(selectedElement);
   await page.waitForSelector('.msg-form__contenteditable.t-14.t-black--light.t-normal.flex-grow-1.full-height.notranslate');
   await cursor.click('.msg-form__contenteditable.t-14.t-black--light.t-normal.flex-grow-1.full-height.notranslate');
-  await page.keyboard.type("Hi there, I am interested in your job posting.");
-  await page.keyboard.press('Enter');
+  await page.keyboard.type("您好");
+  await page.waitForSelector('.msg-form__send-button.artdeco-button.artdeco-button--1')
+  await cursor.click('.msg-form__send-button.artdeco-button.artdeco-button--1');
   await page.waitForSelector('.msg-overlay-bubble-header__control.artdeco-button.artdeco-button--circle.artdeco-button--muted.artdeco-button--1.artdeco-button--tertiary.ember-view')
   await cursor.click('.msg-overlay-bubble-header__control.artdeco-button.artdeco-button--circle.artdeco-button--muted.artdeco-button--1.artdeco-button--tertiary.ember-view')
 }
 
-}
+
 
 
 
