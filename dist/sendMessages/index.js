@@ -62,7 +62,13 @@ async function writeMessage(selectedElement, page, cursor) {
     await page.keyboard.type("您好");
     await page.waitForSelector('.msg-form__send-button.artdeco-button.artdeco-button--1');
     await cursor.click('.msg-form__send-button.artdeco-button.artdeco-button--1');
-    await page.waitForSelector('.msg-overlay-bubble-header__control.artdeco-button.artdeco-button--circle.artdeco-button--muted.artdeco-button--1.artdeco-button--tertiary.ember-view');
-    await cursor.click('.msg-overlay-bubble-header__control.artdeco-button.artdeco-button--circle.artdeco-button--muted.artdeco-button--1.artdeco-button--tertiary.ember-view');
+    // Write a function that closes this window
+    // Select the opened window
+    await page.evaluate(async () => {
+        const $anchor = document.querySelectorAll('.msg-overlay-bubble-header')[1];
+        $anchor.click();
+    });
+    // await page.waitForSelector('.msg-overlay-bubble-header__control.artdeco-button.artdeco-button--circle.artdeco-button--muted.artdeco-button--1.artdeco-button--tertiary.ember-view')
+    // await cursor.click('.msg-overlay-bubble-header__control.artdeco-button.artdeco-button--circle.artdeco-button--muted.artdeco-button--1.artdeco-button--tertiary.ember-view')
 }
 exports.default = collectMessageBtn;
