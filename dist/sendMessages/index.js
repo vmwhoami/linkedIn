@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const UrlModifier_1 = require("./UrlModifier");
 const ghost_cursor_1 = require("ghost-cursor");
 const collectMessageBtn = async (page, url, sendMessagesOptions) => {
-    const generateLink = (0, UrlModifier_1.default)(url, sendMessagesOptions, 5);
+    const generateLink = (0, UrlModifier_1.default)(url, sendMessagesOptions, 6);
     await page.goto(generateLink); // Generated Link will change to switch between pages update this to dynamic
     const subtitles = await page.evaluateHandle(async () => {
         let resultRecruiters = [];
@@ -65,10 +65,10 @@ async function writeMessage(selectedElement, page, cursor) {
     // Write a function that closes this window
     // Select the opened window
     await page.evaluate(async () => {
-        const $anchor = document.querySelectorAll('.msg-overlay-bubble-header')[1];
-        $anchor.click();
+        const closeBtn = await document.querySelectorAll('.msg-overlay-bubble-header__control.artdeco-button.artdeco-button--circle.artdeco-button--muted.artdeco-button--1.artdeco-button--tertiary.ember-view')[3];
+        await closeBtn.click();
     });
-    // await page.waitForSelector('.msg-overlay-bubble-header__control.artdeco-button.artdeco-button--circle.artdeco-button--muted.artdeco-button--1.artdeco-button--tertiary.ember-view')
+    // await page.waitForSelectorAll('.msg-overlay-bubble-header__control.artdeco-button.artdeco-button--circle.artdeco-button--muted.artdeco-button--1.artdeco-button--tertiary.ember-view')[3].click()
     // await cursor.click('.msg-overlay-bubble-header__control.artdeco-button.artdeco-button--circle.artdeco-button--muted.artdeco-button--1.artdeco-button--tertiary.ember-view')
 }
 exports.default = collectMessageBtn;

@@ -5,7 +5,7 @@ import { createCursor } from "ghost-cursor";
 const collectMessageBtn = async (page: OptionTypes["page"],
   url: OptionTypes["url"],
   sendMessagesOptions: OptionTypes["sendMessagesOptions"]): Promise<void> => {
-  const generateLink: string = sendMessagesUrlModifier(url, sendMessagesOptions, 5);
+  const generateLink: string = sendMessagesUrlModifier(url, sendMessagesOptions, 6);
 
   await page.goto(generateLink); // Generated Link will change to switch between pages update this to dynamic
 
@@ -87,10 +87,11 @@ async function writeMessage(selectedElement: any, page: any, cursor: any) {
   // Write a function that closes this window
   // Select the opened window
   await page.evaluate(async () => {
-    const $anchor = document.querySelectorAll('.msg-overlay-bubble-header')[1];
-    $anchor.click();
+    const closeBtn = await document.querySelectorAll('.msg-overlay-bubble-header__control.artdeco-button.artdeco-button--circle.artdeco-button--muted.artdeco-button--1.artdeco-button--tertiary.ember-view')[3]
+    await closeBtn.click()
+  
   });
-  // await page.waitForSelector('.msg-overlay-bubble-header__control.artdeco-button.artdeco-button--circle.artdeco-button--muted.artdeco-button--1.artdeco-button--tertiary.ember-view')
+  // await page.waitForSelectorAll('.msg-overlay-bubble-header__control.artdeco-button.artdeco-button--circle.artdeco-button--muted.artdeco-button--1.artdeco-button--tertiary.ember-view')[3].click()
   // await cursor.click('.msg-overlay-bubble-header__control.artdeco-button.artdeco-button--circle.artdeco-button--muted.artdeco-button--1.artdeco-button--tertiary.ember-view')
 }
 
