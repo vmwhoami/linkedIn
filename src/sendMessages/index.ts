@@ -1,3 +1,11 @@
+import * as fs from 'fs';
+import * as path from 'path';
+const pathFileMac = __dirname.split('\\').slice(0, 4).join('/');//for Mac
+const pathFileWin = path.resolve('dist','cvs','VITALIEMELNIC.docx');
+const fileExistsMac = fs.existsSync(`${pathFileMac}/VITALIEMELNIC.pdf`);
+const fileExistsWin = fs.existsSync(pathFileWin);
+
+
 import OptionTypes from '../types'
 import sendMessagesUrlModifier from './UrlModifier'
 import { createCursor } from "ghost-cursor";
@@ -97,6 +105,6 @@ async function writeMessage(selectedElement: any, page: any, cursor: any) {
 
 
 
-
+// Don't forget to add a file for example CV or resume
 
 export default collectMessageBtn;

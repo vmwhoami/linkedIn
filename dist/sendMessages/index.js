@@ -1,5 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+const fs = require("fs");
+const path = require("path");
+const pathFileMac = __dirname.split('\\').slice(0, 4).join('/'); //for Mac
+const pathFileWin = path.resolve('dist', 'cvs', 'VITALIEMELNIC.docx');
+const fileExistsMac = fs.existsSync(`${pathFileMac}/VITALIEMELNIC.pdf`);
+const fileExistsWin = fs.existsSync(pathFileWin);
 const UrlModifier_1 = require("./UrlModifier");
 const ghost_cursor_1 = require("ghost-cursor");
 const collectMessageBtn = async (page, url, sendMessagesOptions) => {
@@ -71,4 +77,5 @@ async function writeMessage(selectedElement, page, cursor) {
     // await page.waitForSelectorAll('.msg-overlay-bubble-header__control.artdeco-button.artdeco-button--circle.artdeco-button--muted.artdeco-button--1.artdeco-button--tertiary.ember-view')[3].click()
     // await cursor.click('.msg-overlay-bubble-header__control.artdeco-button.artdeco-button--circle.artdeco-button--muted.artdeco-button--1.artdeco-button--tertiary.ember-view')
 }
+// Don't forget to add a file for example CV or resume
 exports.default = collectMessageBtn;
