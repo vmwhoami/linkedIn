@@ -100,12 +100,21 @@ async function writeMessage(selectedElement: any, page: any, cursor: any) {
     await closeBtn.click()
   
   });
-  // await page.waitForSelectorAll('.msg-overlay-bubble-header__control.artdeco-button.artdeco-button--circle.artdeco-button--muted.artdeco-button--1.artdeco-button--tertiary.ember-view')[3].click()
-  // await cursor.click('.msg-overlay-bubble-header__control.artdeco-button.artdeco-button--circle.artdeco-button--muted.artdeco-button--1.artdeco-button--tertiary.ember-view')
+
+  // Code for uploading a file
+  const elementHandle = await page.$('input[type=file]');
+  uploadCV(fileExistsMac,fileExistsWin,elementHandle)
+  await page.waitForSelector('.msg-form__footer-action.artdeco-button.artdeco-button--tertiary.artdeco-button--circle.artdeco-button--muted')[1]
 }
 
 
-
+const uploadCV = async (fileExistsMac: boolean,fileExistsWin:boolean, elementHandle: any) => {
+  if (fileExistsMac ) {
+    await elementHandle.uploadFile(`${pathFileMac}/VITALIEMELNIC.pdf`);
+  }else if(fileExistsWin){
+    await elementHandle.uploadFile(`${pathFileWin}`);
+  }
+};
 // Don't forget to add a file for example CV or resume
 
 export default collectMessageBtn;
