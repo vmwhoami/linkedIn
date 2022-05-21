@@ -91,6 +91,7 @@ async function writeMessage(selectedElement: any, page: any, cursor: any) {
   await page.keyboard.type("您好");
   await page.waitForSelector('.msg-form__send-button.artdeco-button.artdeco-button--1')
   await cursor.click('.msg-form__send-button.artdeco-button.artdeco-button--1');
+  await page.waitForNavigation();
 
   // Write a function that closes this window
   // Select the opened window

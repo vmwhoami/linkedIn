@@ -20,8 +20,8 @@ const options = {
     url: 'https://www.linkedin.com/',
     viewPortOptions: { width: 1200, height: 900 },
     browserOptions: { headless: false, slowMo: 20, devtools: false },
-    connect: false,
-    sendMessages: true,
+    connect: true,
+    sendMessages: false,
     loginOptions: {
         email: process.env.EMAIL,
         password: process.env.PASSWORD
