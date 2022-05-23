@@ -69,16 +69,17 @@ async function writeMessage(selectedElement, page, cursor) {
     await page.waitForSelector('.msg-form__send-button.artdeco-button.artdeco-button--1');
     await cursor.click('.msg-form__send-button.artdeco-button.artdeco-button--1');
     await page.waitForNavigation();
+    const elementHandle = await page.$('input[type=file]');
+    uploadCV(fileExistsMac, fileExistsWin, elementHandle);
+    await page.waitForSelector('.msg-form__footer-action.artdeco-button.artdeco-button--tertiary.artdeco-button--circle.artdeco-button--muted')[1];
     // Write a function that closes this window
     // Select the opened window
     await page.evaluate(async () => {
+        // Figure a way to select the 3rd window
         const closeBtn = await document.querySelectorAll('.msg-overlay-bubble-header__control.artdeco-button.artdeco-button--circle.artdeco-button--muted.artdeco-button--1.artdeco-button--tertiary.ember-view')[3];
         await closeBtn.click();
     });
     // Code for uploading a file
-    const elementHandle = await page.$('input[type=file]');
-    uploadCV(fileExistsMac, fileExistsWin, elementHandle);
-    await page.waitForSelector('.msg-form__footer-action.artdeco-button.artdeco-button--tertiary.artdeco-button--circle.artdeco-button--muted')[1];
 }
 const uploadCV = async (fileExistsMac, fileExistsWin, elementHandle) => {
     if (fileExistsMac) {
