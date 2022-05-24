@@ -104,8 +104,8 @@ async function writeMessage(selectedElement: any, page: any, cursor: any) {
   await page.evaluate(async () => { 
 
     // Figure a way to select the 3rd window
-    const closeBtn = await document.querySelectorAll('.msg-overlay-bubble-header__control.artdeco-button.artdeco-button--circle.artdeco-button--muted.artdeco-button--1.artdeco-button--tertiary.ember-view')[3]
-    await closeBtn.click()
+  await document.querySelectorAll('.msg-overlay-bubble-header__control.artdeco-button.artdeco-button--circle.artdeco-button--muted.artdeco-button--1.artdeco-button--tertiary.ember-view')[3].click()
+ // the
   });
 
   // Code for uploading a file
