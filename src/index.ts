@@ -3,7 +3,7 @@ require('dotenv').config({ path: '.env' })
 import OptionTypes from './types'
 import { startBrowser } from './startCloseBrowser';
 import login from './login';
-import connectFunction from './connect/connect';
+import connectFunction from './connect/index';
 import options from './options';
 import sendMessagesFunction from './sendMessages';
 

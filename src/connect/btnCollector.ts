@@ -1,5 +1,5 @@
 // import { createCursor } from "ghost-cursor";
-import connecterMethod from "./connecterMethod";
+import connectorMethod from "./connectorMethod";
 
 const btnCollector = async (page: any) => {
   await page.waitForSelector('.entity-result__item .artdeco-button.artdeco-button--2.artdeco-button--secondary.ember-view');
@@ -19,7 +19,7 @@ const btnCollector = async (page: any) => {
     element ? children.push(element) : null;
   }
 
-  await connecterMethod(children, page);
+  await connectorMethod(children, page);
 }
 
 export default btnCollector;

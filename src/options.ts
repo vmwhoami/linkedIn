@@ -13,7 +13,8 @@ const keywords = {
   'crypto': 'crypto',
   'software recruiter': 'software recruiter',
   'frontend recruiter': 'frontend recruiter',
-  'backend recruiter': 'backend recruiter'
+  'backend recruiter': 'backend recruiter',
+  'it recruiter': 'it recruiter',
 }
 
 const options = {
@@ -30,9 +31,9 @@ const options = {
 
   connectOptions: {
     people: 'search/results/people/?geoUrn=%5B"',
-    region: locations['New York'],
+    region: locations['Miami'],
     beforeKeword: '%22%5D&keywords=',
-    keywords: `${keywords['frontend recruiter']}`,
+    keywords: `${keywords['it recruiter']}`,
     Headers: '%20&origin=GLOBAL_SEARCH_HEADER'
   },
 

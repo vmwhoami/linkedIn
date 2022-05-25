@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 // import { createCursor } from "ghost-cursor";
-const connecterMethod_1 = require("./connecterMethod");
+const connectorMethod_1 = require("./connectorMethod");
 const btnCollector = async (page) => {
     await page.waitForSelector('.entity-result__item .artdeco-button.artdeco-button--2.artdeco-button--secondary.ember-view');
     const children = [];
@@ -16,6 +16,6 @@ const btnCollector = async (page) => {
         const element = property.asElement();
         element ? children.push(element) : null;
     }
-    await (0, connecterMethod_1.default)(children, page);
+    await (0, connectorMethod_1.default)(children, page);
 };
 exports.default = btnCollector;

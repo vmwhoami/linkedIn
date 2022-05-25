@@ -4,7 +4,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 require('dotenv').config({ path: '.env' });
 const startCloseBrowser_1 = require("./startCloseBrowser");
 const login_1 = require("./login");
-const connect_1 = require("./connect/connect");
+const index_1 = require("./connect/index");
 const options_1 = require("./options");
 const sendMessages_1 = require("./sendMessages");
 const linkedInParser = async (options) => {
@@ -14,7 +14,7 @@ const linkedInParser = async (options) => {
     await page.goto(url);
     await (0, login_1.default)(page, loginOptions);
     await page.waitForTimeout(200);
-    connect ? await (0, connect_1.default)(page, url, connectOptions) : null;
+    connect ? await (0, index_1.default)(page, url, connectOptions) : null;
     // TODO: think about separating options into different files
     sendMessages ? await (0, sendMessages_1.default)(page, url, sendMessagesOptions) : null;
     // await page.goto(url + search);

@@ -5,7 +5,7 @@ const connecterMethod = async (elements_arr: any, page: any) => {
 
   while (elements_arr.length > 0) {
     const selectedElement = elements_arr.shift();
-    await selectedElement.click({ clickCount: 2 });
+    await selectedElement.click();
     
     if (await page.$('.artdeco-button.artdeco-button--2.artdeco-button--primary.artdeco-button--disabled.ember-view.ml1') !== null) {
       await page.waitForSelector('.artdeco-modal__dismiss.artdeco-button');
