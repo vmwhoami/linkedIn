@@ -7,7 +7,7 @@ const btnCollector = async (page) => {
     const children = [];
     // page.evaluate will run the code once and return data.
     // page.waitForFunction will run the code repeatedly until the code returns truthy values.
-    const elementsHendles = await page.waitForFunction(async () => {
+    const elementsHendles = await page.evaluateHandle(async () => {
         const spans = await document.querySelectorAll('.entity-result__item .artdeco-button.artdeco-button--2.artdeco-button--secondary.ember-view:not(.artdeco-button--muted)');
         return [...spans].filter(span => span.textContent.replace(/\n/g, '').trim() === "Connect");
     });
@@ -18,4 +18,6 @@ const btnCollector = async (page) => {
     }
     await (0, connectorMethod_1.default)(children, page);
 };
+async function collectButtons(page) {
+}
 exports.default = btnCollector;
