@@ -31,7 +31,7 @@ const options = {
         people: 'search/results/people/?geoUrn=%5B"',
         region: locations['Philadelphia'],
         beforeKeword: '%22%5D&keywords=',
-        keywords: `${keywords['software recruiter']}`,
+        keywords: `${keywords['backend recruiter']}`,
         Headers: '%20&origin=GLOBAL_SEARCH_HEADER'
     },
     sendMessagesOptions: {
