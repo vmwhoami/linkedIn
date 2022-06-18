@@ -18,8 +18,8 @@ const collectMessageBtn = async (page: OptionTypes["page"],
   await page.goto(generateLink); // Generated Link will change to switch between pages update this to dynamic
 
   const subtitles = await page.evaluateHandle(async () => {
-    let resultRecruiters: any = [];
-    let result__items = await document.querySelectorAll('.entity-result__item')
+    const resultRecruiters: any = [];
+    const result__items = await document.querySelectorAll('.entity-result__item')
 
     result__items.forEach(async element => {
       const str: any = element

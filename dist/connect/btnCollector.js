@@ -18,6 +18,4 @@ const btnCollector = async (page) => {
     }
     await (0, connectorMethod_1.default)(children, page);
 };
-async function collectButtons(page) {
-}
 exports.default = btnCollector;

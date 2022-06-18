@@ -7,7 +7,7 @@ const connecterMethod = async (elements_arr, page) => {
         selectedElement.click();
         await page.waitForSelector('.artdeco-modal__actionbar.ember-view.text-align-right .ml1');
         await cursor.click('.artdeco-modal__actionbar.ember-view.text-align-right .ml1');
-        await page.waitForNavigation();
+        // await page.waitForNavigation();
         // if (await page.$('.artdeco-modal__actionbar.ember-view.text-align-right .ml1') !== null) {
         // } else {
         //   await page.waitForSelector('.artdeco-modal__dismiss.artdeco-button');

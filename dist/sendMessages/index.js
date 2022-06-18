@@ -12,8 +12,8 @@ const collectMessageBtn = async (page, url, sendMessagesOptions) => {
     const generateLink = (0, UrlModifier_1.default)(url, sendMessagesOptions, 6);
     await page.goto(generateLink); // Generated Link will change to switch between pages update this to dynamic
     const subtitles = await page.evaluateHandle(async () => {
-        let resultRecruiters = [];
-        let result__items = await document.querySelectorAll('.entity-result__item');
+        const resultRecruiters = [];
+        const result__items = await document.querySelectorAll('.entity-result__item');
         result__items.forEach(async (element) => {
             const str = element
                 .querySelector('.entity-result__primary-subtitle')?.textContent?.replace(/\n/g, '')
